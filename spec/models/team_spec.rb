@@ -8,6 +8,6 @@ RSpec.describe Team do
   it { should have_valid(:name).when('Falcons', 'Chiefs') }
   it { should_not have_valid(:name).when(nil, '') }
 
-  it { should have_valid(:abbreviation).when('ATL', 'TB', 'NO', 'CAR' }
+  it { should have_valid(:abbreviation).when('ATL', 'TB', 'NO', 'CAR') }
   it { should_not have_valid(:abbreviation).when(nil, '', 'X', 'XXXX') }
 end
