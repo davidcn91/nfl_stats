@@ -9,6 +9,7 @@ feature 'user signs up' , %Q{
   # ACCEPTANCE CRITERIA
   # * I must specify a valid email address
   # * I must specify a password, and confirm that password
+  # * I must select my favorite team
   # * If I do not perform the above, I get an error message
   # * If I specify valid information, I register my account and am authenticated
 
@@ -37,6 +38,7 @@ feature 'user signs up' , %Q{
     click_button 'Sign Up'
 
     expect(page).to have_content("can't be blank")
+    expect(page).to have_content("Must choose favorite team")
     expect(page).to_not have_content("Sign Out")
   end
 
