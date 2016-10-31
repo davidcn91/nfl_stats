@@ -23,7 +23,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password, "New Password" %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
     <% if @minimum_password_length %>
       <br />
@@ -32,13 +32,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Password Confirmation" %><i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password_confirmation, "New Password Confirmation" %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="field">
     <%= f.label :favorite_team, 'Favorite Team' %>
-    <%= f.select :team_id, @team_collection, include_blank: true %>
+    <%= f.select :team_id, @team_collection, selected: @favorite_team %>
   </div>
 
   <div class="field">

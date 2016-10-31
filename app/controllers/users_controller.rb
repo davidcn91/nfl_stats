@@ -1,3 +1,4 @@
+require 'pry'
 class UsersController < Devise::RegistrationsController
 
   def new
@@ -35,6 +36,7 @@ class UsersController < Devise::RegistrationsController
 
   def edit
     @team_collection = Team.pluck(:name).sort
+    @favorite_team = Team.where(id: current_user.team_id)[0].name
     render :edit
   end
 
