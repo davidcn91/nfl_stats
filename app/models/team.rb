@@ -3,4 +3,5 @@ class Team < ActiveRecord::Base
   validates :abbreviation, length: { minimum: 2, maximum: 3}
 
   has_many :games
+  has_many :users
 end
