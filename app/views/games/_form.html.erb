@@ -1,0 +1,42 @@
+<%= form_for(@game) do |f| %>
+
+  <div class="row">
+    <%= f.label :season %>
+    <%= f.select :season, @season_collection, include_blank: true %>
+  </div>
+
+  <div class="row">
+    <%= f.label :week %>
+    <%= f.select :week, @week_collection, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :away_team, 'Away Team' %>
+    <%= f.select :away_team_id, @team_collection, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_team, 'Home Team' %>
+    <%= f.select :home_team_id, @team_collection, include_blank: true %>
+  </div>
+
+  <div class="row">
+    <%= f.label :away_score %>
+    <%= f.text_field :away_score %>
+  </div>
+
+  <div class="row">
+    <%= f.label :home_score %>
+    <%= f.text_field :home_score %>
+  </div>
+
+  <div class="row">
+    <%= f.label :spread %>
+    <%= f.text_field :spread %>
+  </div>
+
+  <div class="action">
+    <%= f.submit "Submit Game" %>
+  </div>
+
+<% end %>

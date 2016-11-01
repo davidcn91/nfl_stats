@@ -1,3 +1,4 @@
+require 'pry'
 class TeamsController < ApplicationController
 
   def index
@@ -6,6 +7,9 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    away_games = Game.where(away_team_id: @team.id)
+    home_games = Game.where(home_team_id: @team.id)
+    @games = ((away_games + home_games).sort_by { |g| [g.season, g.week] }).reverse
   end
 
   protected
