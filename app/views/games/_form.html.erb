@@ -10,12 +10,12 @@
     <%= f.select :week, @week_collection, include_blank: true %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.label :away_team, 'Away Team' %>
     <%= f.select :away_team_id, @team_collection, include_blank: true %>
   </div>
 
-  <div class="field">
+  <div class="row">
     <%= f.label :home_team, 'Home Team' %>
     <%= f.select :home_team_id, @team_collection, include_blank: true %>
   </div>
@@ -31,7 +31,7 @@
   </div>
 
   <div class="row">
-    <%= f.label :spread %>
+    <%= f.label :spread %> <i>(points laid by or given to HOME TEAM)</i>
     <%= f.text_field :spread %>
   </div>
 
