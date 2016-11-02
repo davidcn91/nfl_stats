@@ -18,6 +18,8 @@ team_list = [["Dallas","Cowboys","DAL","NFC East"],["New York","Giants","NYG","N
 ["Tennessee","Titans","TEN","AFC South"],["Denver","Broncos","DEN","AFC West"],["Kansas City","Chiefs","KC","AFC West"],
 ["Oakland","Raiders","OAK","AFC West"],["San Diego","Chargers","SD","AFC West"]]
 
+id = 1
 team_list.each do |location, name, abbreviation, division|
-  Team.create(location: location, name: name, abbreviation: abbreviation, division: division)
+  Team.create(id: id, location: location, name: name, abbreviation: abbreviation, division: division)
+  id += 1
 end

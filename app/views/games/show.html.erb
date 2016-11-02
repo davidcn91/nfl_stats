@@ -1,0 +1,7 @@
+<h1>
+  <%= "#{@game.season} Week #{@game.week}: "%>
+  <%= link_to @game.away_team.name, team_path(@game.away_team.id) %>
+  <%= " #{@game.away_score} at "%>
+  <%= link_to @game.home_team.name, team_path(@game.home_team_id) %>
+  <%= " #{@game.home_score}" %>
+</h1>
