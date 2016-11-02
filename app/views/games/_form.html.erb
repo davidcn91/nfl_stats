@@ -1,5 +1,7 @@
 <%= form_for(@game) do |f| %>
 
+  <h3>Game Info</h3>
+
   <div class="row">
     <%= f.label :season %>
     <%= f.select :season, @season_collection, include_blank: true %>

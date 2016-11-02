@@ -9,7 +9,12 @@
         <h4><%= year %></h4>
         <% @games.reverse.each do |game| %>
           <% if game.season == year %>
-            <%= "Week #{game.week}: #{game.away_team.name} #{game.away_score} @ #{game.home_team.name} #{game.home_score}" %><br/>
+            <%= "Week #{game.week}: #{game.away_team.name} #{game.away_score} @ #{game.home_team.name} #{game.home_score}" %>
+            <% if game.stat.nil? %>
+              <%= link_to "Add Stats", new_game_stat_path(game.id) %>
+            <% else %>
+              <%= link_to "Show Stats", game_stat_path(game.id) %>
+            <% end %>
           <% end %>
         <% end %>
       </li>

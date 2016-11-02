@@ -1,8 +1,8 @@
+<h1>Add New Game</h1>
 <% @game.errors.full_messages.each do |error| %>
   <% if !error.include?("team must exist") %>
     <%= error %><br />
   <% end %>
 <% end %>
 
-<br/>
 <%= render 'form' %>

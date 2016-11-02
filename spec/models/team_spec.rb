@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'spec_helper'
 
 RSpec.describe Team do
   it { should have_valid(:location).when('Atlanta', 'Kansas City') }
