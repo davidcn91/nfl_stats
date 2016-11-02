@@ -1,6 +1,8 @@
+<% require 'pry' %>
 <h1>Teams</h1>
 
 <ul>
+  <% binding.pry %>
   <% @teams.each do |team| %>
     <li><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></li>
   <% end %>
