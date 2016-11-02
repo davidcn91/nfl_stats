@@ -1,4 +1,3 @@
-require 'pry'
 class StatsController < ApplicationController
 
   def new
@@ -21,6 +20,10 @@ class StatsController < ApplicationController
         render :new
       end
     end
+  end
+
+  def show
+
   end
 
   protected
