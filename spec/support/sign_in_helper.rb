@@ -1,4 +1,3 @@
-require 'pry'
 module SignInHelper
   def sign_in(user)
     visit root_path
