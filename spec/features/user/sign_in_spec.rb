@@ -16,50 +16,50 @@ feature 'user signs in', %Q{
     @user = FactoryGirl.create(:user, team_id: @team.id)
   end
 
-  scenario 'an existing user supplies a valid email and password' do
+  scenario "an existing user supplies a valid email and password" do
     visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign In'
-    expect(page).to have_content('Welcome Back!')
-    expect(page).to have_content('Sign Out')
+    click_link "Sign In"
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: @user.password
+    click_button "Sign In"
+    expect(page).to have_content("Welcome Back!")
+    expect(page).to have_content("Sign Out")
   end
 
-  scenario 'a nonexistent email and password is supplied' do
+  scenario "a nonexistent email and password is supplied" do
     visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: 'user@example.com'
-    fill_in 'Password', with: 'password'
-    click_button 'Sign In'
-    expect(page).to have_content('Invalid Email or password.')
-    expect(page).to_not have_content('Welcome Back!')
-    expect(page).to_not have_content('Sign Out')
+    click_link "Sign In"
+    fill_in "Email", with: "user@example.com"
+    fill_in "Password", with: "password"
+    click_button "Sign In"
+    expect(page).to have_content("Invalid Email or password.")
+    expect(page).to_not have_content("Welcome Back!")
+    expect(page).to_not have_content("Sign Out")
   end
 
-  scenario 'an existing email with the wrong password is denied access' do
+  scenario "an existing email with the wrong password is denied access" do
     visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: 'wrong password'
-    click_button 'Sign In'
-    expect(page).to have_content('Invalid Email or password.')
-    expect(page).to_not have_content('Welcome Back!')
-    expect(page).to_not have_content('Sign Out')
+    click_link "Sign In"
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: "wrong password"
+    click_button "Sign In"
+    expect(page).to have_content("Invalid Email or password.")
+    expect(page).to_not have_content("Welcome Back!")
+    expect(page).to_not have_content("Sign Out")
   end
 
-  scenario 'an already authenticated user cannot re-sign in' do
+  scenario "an already authenticated user cannot re-sign in" do
     visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign In'
+    click_link "Sign In"
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: @user.password
+    click_button "Sign In"
 
-    expect(page).to have_content('Sign Out')
-    expect(page).to_not have_content('Sign In')
+    expect(page).to have_content("Sign Out")
+    expect(page).to_not have_content("Sign In")
 
     visit new_user_session_path
 
-    expect(page).to have_content('You are already signed in.')
+    expect(page).to have_content("You are already signed in.")
   end
 end

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/sign_in_helper'
 
 feature 'user adds game stats', %Q{
   As an authenticated user
@@ -23,71 +24,106 @@ feature 'user adds game stats', %Q{
     @game = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_1.id, home_team_id: @team_2.id)
   end
 
-  scenario 'authenticated user supplies valid information' do
-    visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign In'
-    click_link "#{@team.location} #{@team.name} (#{@team.league})"
+  scenario "signed in user is the creator of the game and provides valid information" do
+    sign_in(@user_1)
+    click_link "#{@team_1.location} #{@team_1.name}"
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    click_link "Add Stats"
 
-    click_link 'Add Review'
-    fill_in 'Body', with: @body
-    select 8, from: 'Rate Team (1-10)'
-    click_button 'Submit Review'
+    fill_in "stat_away_plays", with: "50"
+    fill_in "stat_away_yards", with: "500"
+    fill_in "stat_away_third_down_conversions", with: "6"
+    fill_in "stat_away_third_down_attempts", with: "13"
+    fill_in "stat_away_penalties", with: "7"
+    fill_in "stat_away_penalty_yards", with: "50"
+    fill_in "stat_away_rushes", with: "20"
+    fill_in "stat_away_rushing_yards", with: "80"
+    fill_in "stat_away_passes", with: "30"
+    fill_in "stat_away_passing_yards", with: "300"
+    fill_in "stat_away_time_of_possession", with: "32:50"
+    fill_in "stat_away_fumbles", with: "1"
+    fill_in "stat_away_fumbles_lost", with: "1"
+    fill_in "stat_away_interceptions", with: "2"
 
-    expect(page).to have_content("Review added successfully!")
-    expect(page).to have_content(@body)
-    expect(page).to have_content('8')
-    expect(page).to have_content("Add Review")
+    fill_in "stat_home_plays", with: "50"
+    fill_in "stat_home_yards", with: "500"
+    fill_in "stat_home_third_down_conversions", with: "6"
+    fill_in "stat_home_third_down_attempts", with: "13"
+    fill_in "stat_home_penalties", with: "7"
+    fill_in "stat_home_penalty_yards", with: "50"
+    fill_in "stat_home_rushes", with: "20"
+    fill_in "stat_home_rushing_yards", with: "80"
+    fill_in "stat_home_passes", with: "30"
+    fill_in "stat_home_passing_yards", with: "300"
+    fill_in "stat_home_time_of_possession", with: "32:50"
+    fill_in "stat_home_fumbles", with: "1"
+    fill_in "stat_home_fumbles_lost", with: "1"
+    fill_in "stat_home_interceptions", with: "2"
+
+    click_button "Submit Game Stats"
+    expect(page).to have_content("Game stats added successfully!")
+    expect(page).to have_content("#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
   end
 
-  scenario 'authenticated user supplies review body but does not provide rating' do
-    visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign In'
-    click_link "#{@team.location} #{@team.name} (#{@team.league})"
+  scenario 'signed in user is an admin' do
+    sign_in(@user_2)
+    click_link "#{@team_1.location} #{@team_1.name}"
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    click_link "Add Stats"
 
-    click_link 'Add Review'
-    fill_in 'Body', with: @body
-    click_button 'Submit Review'
+    fill_in "stat_away_plays", with: "50"
+    fill_in "stat_away_yards", with: "500"
+    fill_in "stat_away_third_down_conversions", with: "6"
+    fill_in "stat_away_third_down_attempts", with: "13"
+    fill_in "stat_away_penalties", with: "7"
+    fill_in "stat_away_penalty_yards", with: "50"
+    fill_in "stat_away_rushes", with: "20"
+    fill_in "stat_away_rushing_yards", with: "80"
+    fill_in "stat_away_passes", with: "30"
+    fill_in "stat_away_passing_yards", with: "300"
+    fill_in "stat_away_time_of_possession", with: "32:50"
+    fill_in "stat_away_fumbles", with: "1"
+    fill_in "stat_away_fumbles_lost", with: "1"
+    fill_in "stat_away_interceptions", with: "2"
 
-    expect(page).to have_content("Review added successfully!")
-    expect(page).to have_content(@body)
-    expect(page).to_not have_content('Team Rating')
-    expect(page).to have_content("Add Review")
+    fill_in "stat_home_plays", with: "50"
+    fill_in "stat_home_yards", with: "500"
+    fill_in "stat_home_third_down_conversions", with: "6"
+    fill_in "stat_home_third_down_attempts", with: "13"
+    fill_in "stat_home_penalties", with: "7"
+    fill_in "stat_home_penalty_yards", with: "50"
+    fill_in "stat_home_rushes", with: "20"
+    fill_in "stat_home_rushing_yards", with: "80"
+    fill_in "stat_home_passes", with: "30"
+    fill_in "stat_home_passing_yards", with: "300"
+    fill_in "stat_home_time_of_possession", with: "32:50"
+    fill_in "stat_home_fumbles", with: "1"
+    fill_in "stat_home_fumbles_lost", with: "1"
+    fill_in "stat_home_interceptions", with: "2"
+
+    click_button "Submit Game Stats"
+    expect(page).to have_content("Game stats added successfully!")
+    expect(page).to have_content("#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
+  end
+
+  scenario 'authenticated user supplies invalid information' do
+
+  end
+
+  scenario 'signed in user is not creator of the team' do
+    sign_in(@user_3)
+    click_link "#{@team_1.location} #{@team_1.name}"
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to_not have_link("Add Stats")
+    expect{visit new_game_stat_path(@game.id)}.to raise_error(ActionController::RoutingError)
   end
 
   scenario 'user is not signed in' do
     visit root_path
-    click_link "#{@team.location} #{@team.name} (#{@team.league})"
-    expect(page).to_not have_content("Add Review")
-
-    visit new_team_review_path(@team.id)
-    fill_in 'Body', with: @body
-    select 8, from: 'Rate Team (1-10)'
-    click_button 'Submit Review'
-    expect(page).to have_content("You must be signed in to add a review.")
-    expect(page).to_not have_content("Add Review")
-  end
-
-  scenario 'authenticated user supplies invalid information' do
-    visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign In'
-    click_link "#{@team.location} #{@team.name} (#{@team.league})"
-
-    click_link 'Add Review'
-    fill_in 'Body', with: 'Too short of a review'
-    click_button 'Submit Review'
-
-    expect(page).to have_content("Review length must be 30 characters or greater.")
-    expect(page).to_not have_content(@body)
-    expect(page).to have_button("Submit Review")
+    click_link "#{@team_1.location} #{@team_1.name}"
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to_not have_link("Add Stats")
+    expect{visit new_game_stat_path(@game.id)}.to raise_error(ActionController::RoutingError)
   end
 
 end

@@ -17,25 +17,25 @@ feature 'user signs out' , %Q{
 
   end
 
-  scenario 'signed in' do
+  scenario "signed in" do
     visit root_path
-    click_link 'Sign In'
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign In'
+    click_link "Sign In"
+    fill_in "Email", with: @user.email
+    fill_in "Password", with: @user.password
+    click_button "Sign In"
 
-    click_link 'Sign Out'
-    expect(page).to have_content('Signed out successfully.')
-    expect(page).to have_content('Sign In')
-    expect(page).to have_content('Sign Up')
-    expect(page).to_not have_content('Sign Out')
+    click_link "Sign Out"
+    expect(page).to have_content("Signed out successfully.")
+    expect(page).to have_content("Sign In")
+    expect(page).to have_content("Sign Up")
+    expect(page).to_not have_content("Sign Out")
   end
 
-  scenario 'not signed in' do
+  scenario "not signed in" do
     visit root_path
-    expect(page).to have_content('Sign In')
-    expect(page).to have_content('Sign Up')
-    expect(page).to_not have_content('Sign Out')
+    expect(page).to have_content("Sign In")
+    expect(page).to have_content("Sign Up")
+    expect(page).to_not have_content("Sign Out")
   end
 
 end

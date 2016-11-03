@@ -15,7 +15,7 @@ feature 'user views team page', %Q{
     @team_2 = FactoryGirl.create(:team, abbreviation: "DEN")
   end
 
-  scenario 'user clicks on team link' do
+  scenario "user clicks on team link" do
     visit root_path
     click_link "#{@team_1.location} #{@team_1.name}"
 

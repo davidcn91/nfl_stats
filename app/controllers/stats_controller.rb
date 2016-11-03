@@ -2,6 +2,7 @@ class StatsController < ApplicationController
 
   def new
     @game = Game.find(params[:game_id])
+    authorize_user(@game)
     @stat = Stat.new
   end
 
@@ -35,6 +36,12 @@ class StatsController < ApplicationController
     :home_plays, :home_yards, :home_third_down_conversions, :home_third_down_attempts,
     :home_penalties, :home_penalty_yards, :home_rushes, :home_rushing_yards, :home_passes,
     :home_passing_yards, :home_time_of_possession, :home_fumbles, :home_fumbles_lost, :home_interceptions)
+  end
+
+  def authorize_user(game)
+    if !user_signed_in? || (!current_user.admin? && (current_user.id != game.user_id))
+      raise ActionController::RoutingError.new("Not Found")
+    end
   end
 
 end

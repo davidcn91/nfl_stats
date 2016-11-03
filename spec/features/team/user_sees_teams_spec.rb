@@ -10,10 +10,10 @@ feature 'user views teams', %Q{
   # * I should be able to click on any team to view its details.
   # * I should see the team information and game data from a team's detail page.
 
-  scenario 'user view list of teams' do
+  scenario "user view list of teams" do
     team = FactoryGirl.create(:team)
     visit root_path
-    expect(page).to have_content('Teams')
+    expect(page).to have_content("Teams")
     expect(page).to have_link("#{team.location} #{team.name}")
   end
 
