@@ -1,0 +1,17 @@
+<h1>Edit Game</h1>
+
+<h3>
+  <%= "#{@header_season} Week #{@header_week}: "%>
+  <%= link_to @header_away_team.name, team_path(@header_away_team.id) %>
+  <%= " #{@header_away_score} at "%>
+  <%= link_to @header_home_team.name, team_path(@header_home_team.id) %>
+  <%= " #{@header_home_score}" %>
+</h3>
+
+<% @game.errors.full_messages.each do |error| %>
+  <% if !error.include?("team must exist") %>
+    <%= error %><br />
+  <% end %>
+<% end %>
+
+<%= render 'form' %>

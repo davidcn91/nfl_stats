@@ -26,7 +26,7 @@ feature 'user deletes game', %Q{
     expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
 
     click_button "Delete Game"
-    expect(page).to have_content("Game deleted successfully.")
+    expect(page).to have_content("Game deleted successfully!")
 
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
@@ -38,7 +38,7 @@ feature 'user deletes game', %Q{
     expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
 
     click_button "Delete Game"
-    expect(page).to have_content("Game deleted successfully.")
+    expect(page).to have_content("Game deleted successfully!")
 
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")

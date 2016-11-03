@@ -14,12 +14,12 @@
 
   <div class="row">
     <%= f.label :away_team, "Away Team" %>
-    <%= f.select :away_team_id, @team_collection, include_blank: true %>
+    <%= f.select :away_team_id, @team_collection, include_blank: true, selected: @away_team %>
   </div>
 
   <div class="row">
     <%= f.label :home_team, "Home Team" %>
-    <%= f.select :home_team_id, @team_collection, include_blank: true %>
+    <%= f.select :home_team_id, @team_collection, include_blank: true, selected: @home_team %>
   </div>
 
   <div class="row">

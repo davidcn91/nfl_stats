@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
   belongs_to :away_team, class_name: 'Team', foreign_key: 'away_team_id'
   belongs_to :home_team, class_name: 'Team', foreign_key: 'home_team_id'
   belongs_to :user
-  has_one :stat
+  has_one :stat, dependent: :destroy
 
   SEASONS = (2000..2016).to_a.reverse
   WEEKS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]

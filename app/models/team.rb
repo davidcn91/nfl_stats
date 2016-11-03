@@ -3,7 +3,7 @@ class Team < ActiveRecord::Base
   validates :name, :abbreviation, uniqueness: true
   validates :abbreviation, length: { minimum: 2, maximum: 3}
 
-  has_many :games
+  has_many :games, dependent: :destroy
   has_many :users
 
   DIVISIONS = ["NFC East", "NFC North", "NFC South", "NFC West",
