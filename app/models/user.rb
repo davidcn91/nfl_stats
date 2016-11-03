@@ -4,10 +4,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
-   validates_confirmation_of :password
-   validates :first_name, :last_name, :email, :team_id, presence: true
-   validates :email, uniqueness: true
+  validates_confirmation_of :password
+  validates :first_name, :last_name, :email, :team_id, presence: true
+  validates :email, uniqueness: true
 
-   belongs_to :team
+  belongs_to :team
+  has_many :games
 
+  def admin?
+    role == "admin"
+  end
 end

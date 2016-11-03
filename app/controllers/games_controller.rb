@@ -1,4 +1,3 @@
-require 'pry'
 class GamesController < ApplicationController
 
   def new
@@ -20,11 +19,14 @@ class GamesController < ApplicationController
     if !user_signed_in?
       flash[:notice] = "You must be signed in to add a game."
       render :new
-    elsif @game.save
-      flash[:notice] = "Game added successfully!"
-      redirect_to teams_path
     else
-      render :new
+      @game.user_id = current_user.id
+      if @game.save
+        flash[:notice] = "Game added successfully!"
+        redirect_to teams_path
+      else
+        render :new
+      end
     end
   end
 
@@ -33,8 +35,8 @@ class GamesController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @game = Game.find(params[:id])
+    authorize_user(@game)
     @game.destroy
     flash[:notice] = "Game deleted successfully."
     redirect_to teams_path
@@ -43,6 +45,12 @@ class GamesController < ApplicationController
   protected
   def game_params
     params.require(:game).permit(:season, :week, :away_team_id, :home_team_id, :away_score, :home_score, :spread)
+  end
+
+  def authorize_user(game)
+    if !user_signed_in? || (!current_user.admin? && (current_user.id != game.user_id))
+      raise ActionController::RoutingError.new("Not Found")
+    end
   end
 
 end
