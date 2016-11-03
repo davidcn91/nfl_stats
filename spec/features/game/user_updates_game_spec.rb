@@ -23,7 +23,7 @@ feature 'user updates game', %Q{
     @game = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_1.id, home_team_id: @team_2.id)
   end
 
-  scenario 'signed in user is the creator of the team and provides valid information' do
+  scenario 'signed in user is the creator of the game and provides valid information' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
