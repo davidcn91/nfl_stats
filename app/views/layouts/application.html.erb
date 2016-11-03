@@ -32,7 +32,9 @@
     <% end %>
 
     <%= yield %>
-    <p><%= link_to 'View Team List', teams_path %></p>
-    <p><%= link_to 'Add Game', new_game_path %></p>
+    <p><%= link_to 'Team List', teams_path %></p>
+    <% if user_signed_in? %>
+      <p><%= link_to 'Add Game', new_game_path %></p>
+    <% end %>
   </body>
 </html>

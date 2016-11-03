@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101175825) do
+ActiveRecord::Schema.define(version: 20161102203213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,43 @@ ActiveRecord::Schema.define(version: 20161101175825) do
     t.integer "away_team_id"
   end
 
+  create_table "stats", force: :cascade do |t|
+    t.integer "away_plays",                  null: false
+    t.integer "away_yards",                  null: false
+    t.integer "away_third_down_conversions", null: false
+    t.integer "away_third_down_attempts",    null: false
+    t.integer "away_penalties",              null: false
+    t.integer "away_penalty_yards",          null: false
+    t.integer "away_rushes",                 null: false
+    t.integer "away_rushing_yards",          null: false
+    t.integer "away_passes",                 null: false
+    t.integer "away_passing_yards",          null: false
+    t.string  "away_time_of_possession",     null: false
+    t.integer "away_fumbles",                null: false
+    t.integer "away_fumbles_lost",           null: false
+    t.integer "away_interceptions",          null: false
+    t.integer "home_plays",                  null: false
+    t.integer "home_yards",                  null: false
+    t.integer "home_third_down_conversions", null: false
+    t.integer "home_third_down_attempts",    null: false
+    t.integer "home_penalties",              null: false
+    t.integer "home_penalty_yards",          null: false
+    t.integer "home_rushes",                 null: false
+    t.integer "home_rushing_yards",          null: false
+    t.integer "home_passes",                 null: false
+    t.integer "home_passing_yards",          null: false
+    t.string  "home_time_of_possession",     null: false
+    t.integer "home_fumbles",                null: false
+    t.integer "home_fumbles_lost",           null: false
+    t.integer "home_interceptions",          null: false
+    t.integer "game_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "location",     null: false
     t.string "name",         null: false
     t.string "abbreviation", null: false
+    t.string "division"
   end
 
   create_table "users", force: :cascade do |t|
