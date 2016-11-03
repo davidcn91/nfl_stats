@@ -53,6 +53,34 @@ feature 'user creates game', %Q{
     expect(page).to have_content("Away score can't be blank")
     expect(page).to have_content("Home score can't be blank")
     expect(page).to have_content("Spread can't be blank")
+
+    select 2015, from: 'Season'
+    select 4, from: 'Week'
+    select @team_1.name, from: 'game_away_team_id'
+    select @team_1.name, from: 'game_home_team_id'
+    fill_in 'Away Score', with: '27'
+    fill_in 'Home Score', with: '14'
+    fill_in 'Spread', with: '4'
+    click_button 'Submit Game'
+
+    expect(page).to have_content("Away team can't be the same as home team")
+
+    select @team_1.name, from: 'game_away_team_id'
+    select @team_2.name, from: 'game_home_team_id'
+    fill_in 'Away Score', with: 'x'
+    fill_in 'Home Score', with: 'y'
+    click_button 'Submit Game'
+
+    expect(page).to have_content("Away score is not a number")
+    expect(page).to have_content("Home score is not a number")
+
+    select @team_1.name, from: 'game_away_team_id'
+    select @team_2.name, from: 'game_home_team_id'
+    fill_in 'Away Score', with: '-5'
+    fill_in 'Home Score', with: '-10'
+    click_button 'Submit Game'
+    expect(page).to have_content("Away score must be greater than or equal to 0")
+    expect(page).to have_content("Home score must be greater than or equal to 0")
   end
 
 end
