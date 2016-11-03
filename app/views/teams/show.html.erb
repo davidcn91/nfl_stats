@@ -16,7 +16,8 @@
               <%= link_to "Show Stats", game_stat_path(game.id) %>
             <% end %>
             <% if user_signed_in? && ((current_user.id == game.user_id) || current_user.role == "admin") %>
-              <%= button_to "Delete Game", game, method: :delete, value: @team.name %>
+              <%= link_to "Edit Game", edit_game_path(game.id) %>
+              <%= button_to "Delete Game", game, method: :delete %>
             <% end %>
             <br />
           <% end %>

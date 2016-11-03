@@ -9,5 +9,5 @@ module SignInHelper
 end
 
 RSpec.configure do |config|
-  config.include SignInHelper, :type => :feature
+  config.include SignInHelper, type: :feature
 end
