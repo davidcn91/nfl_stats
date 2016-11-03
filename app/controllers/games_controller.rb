@@ -1,3 +1,4 @@
+require 'pry'
 class GamesController < ApplicationController
 
   def new
@@ -29,6 +30,14 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+  end
+
+  def destroy
+    binding.pry
+    @game = Game.find(params[:id])
+    @game.destroy
+    flash[:notice] = "Game deleted successfully."
+    redirect_to teams_path
   end
 
   protected

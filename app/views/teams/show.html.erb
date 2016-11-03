@@ -15,6 +15,8 @@
             <% else %>
               <%= link_to "Show Stats", game_stat_path(game.id) %>
             <% end %>
+            <%= button_to "Delete Game", game, method: :delete, value: @team.name %>
+            <br />
           <% end %>
         <% end %>
       </li>
