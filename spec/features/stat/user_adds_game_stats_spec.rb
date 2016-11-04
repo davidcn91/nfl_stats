@@ -107,7 +107,48 @@ feature 'user adds game stats', %Q{
   end
 
   scenario 'authenticated user supplies invalid information' do
+    sign_in(@user_1)
+    click_link "#{@team_1.location} #{@team_1.name}"
+    click_link "Add Stats"
 
+    click_button "Submit Game Stats"
+    expect(page).to_not have_content("Game stats added successfully!")
+
+    fill_in "stat_away_plays", with: "30"
+    fill_in "stat_away_yards", with: "500"
+    fill_in "stat_away_third_down_conversions", with: "14"
+    fill_in "stat_away_third_down_attempts", with: "13"
+    fill_in "stat_away_penalties", with: "7"
+    fill_in "stat_away_penalty_yards", with: "50"
+    fill_in "stat_away_rushes", with: "20"
+    fill_in "stat_away_rushing_yards", with: "80"
+    fill_in "stat_away_passes", with: "30"
+    fill_in "stat_away_passing_yards", with: "300"
+    fill_in "stat_away_time_of_possession", with: "32:50"
+    fill_in "stat_away_fumbles", with: "1"
+    fill_in "stat_away_fumbles_lost", with: "3"
+    fill_in "stat_away_interceptions", with: "2"
+
+    fill_in "stat_home_plays", with: "50"
+    fill_in "stat_home_yards", with: "500"
+    fill_in "stat_home_third_down_conversions", with: "6"
+    fill_in "stat_home_third_down_attempts", with: "13"
+    fill_in "stat_home_penalties", with: "7"
+    fill_in "stat_home_penalty_yards", with: "50"
+    fill_in "stat_home_rushes", with: "20"
+    fill_in "stat_home_rushing_yards", with: "80"
+    fill_in "stat_home_passes", with: "30"
+    fill_in "stat_home_passing_yards", with: "300"
+    fill_in "stat_home_time_of_possession", with: "32:50"
+    fill_in "stat_home_fumbles", with: "1"
+    fill_in "stat_home_fumbles_lost", with: "1"
+    fill_in "stat_home_interceptions", with: "2"
+
+    click_button "Submit Game Stats"
+    expect(page).to_not have_content("Game stats added successfully!")
+    expect(page).to have_content("Away plays can't be fewer than rushes plus passes")
+    expect(page).to have_content("Away third down attempts can't be fewer than third down conversions")
+    expect(page).to have_content("Away fumbles can't be fewer than fumbles lost")
   end
 
   scenario 'signed in user is not creator of the team' do

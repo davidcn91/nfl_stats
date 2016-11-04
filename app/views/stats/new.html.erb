@@ -1,3 +1,8 @@
 <h1>Add Stats</h1>
 <h3><%= "#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}" %></h3>
+
+<% @stat.errors.full_messages.each do |error| %>
+  <%= error %><br />
+<% end %>
+
 <%= render 'form' %>
