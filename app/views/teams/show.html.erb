@@ -11,7 +11,7 @@
           <% if game.season == year %>
             <%= "Week #{game.week}: #{game.away_team.name} #{game.away_score} @ #{game.home_team.name} #{game.home_score}" %>
             <% if !game.stat.nil? %>
-              <%= link_to "Show Stats", game_stat_path(game.id) %>
+              <%= link_to "Show Stats", game_path(game.id) %>
             <% elsif user_signed_in? && ((current_user.id == game.user_id) || current_user.admin?) %>
               <%= link_to "Add Stats", new_game_stat_path(game.id) %>
             <% end %>

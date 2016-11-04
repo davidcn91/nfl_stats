@@ -62,7 +62,7 @@ feature 'user adds game stats', %Q{
 
     click_button "Submit Game Stats"
     expect(page).to have_content("Game stats added successfully!")
-    expect(page).to have_content("#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("#{@game.season} Week #{@game.week}: #{@game.away_team.location} #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.location} #{@game.home_team.name} #{@game.home_score}")
   end
 
   scenario 'signed in user is an admin' do
@@ -103,7 +103,7 @@ feature 'user adds game stats', %Q{
 
     click_button "Submit Game Stats"
     expect(page).to have_content("Game stats added successfully!")
-    expect(page).to have_content("#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("#{@game.season} Week #{@game.week}: #{@game.away_team.location} #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.location} #{@game.home_team.name} #{@game.home_score}")
   end
 
   scenario 'authenticated user supplies invalid information' do
