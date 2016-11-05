@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'user signs out' , %Q{
   As an authenticated user
   I want to sign out
@@ -14,7 +12,6 @@ feature 'user signs out' , %Q{
   before(:each) do
     @team = FactoryGirl.create(:team)
     @user = FactoryGirl.create(:user, team_id: @team.id)
-
   end
 
   scenario "signed in" do

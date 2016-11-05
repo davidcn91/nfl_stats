@@ -1,6 +1,3 @@
-require 'rails_helper'
-require 'support/sign_in_helper'
-
 feature 'user sees game', %Q{
   As a user
   I want to see game's information

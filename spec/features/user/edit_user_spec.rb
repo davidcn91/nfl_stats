@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'user edits account' , %Q{
   As an authenticated user
   I want to update my information

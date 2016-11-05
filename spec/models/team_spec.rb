@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Team do
   it { should have_valid(:location).when("Atlanta", "Kansas City") }
   it { should_not have_valid(:location).when(nil, "") }

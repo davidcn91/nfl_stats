@@ -1,3 +1,5 @@
 --color
 --require spec_helper
 --fail-fast
+--require sign_in_helper
+--require rails_helper

@@ -1,6 +1,3 @@
-require 'rails_helper'
-require 'support/sign_in_helper'
-
 feature 'user deletes game', %Q{
   As an authenticated user
   I want to delete a game

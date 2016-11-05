@@ -1,6 +1,3 @@
-require 'rails_helper'
-require 'support/sign_in_helper'
-
 feature 'user updates game', %Q{
   As an authenticated user
   I want to update an game's information

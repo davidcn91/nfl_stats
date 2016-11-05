@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'user signs up' , %Q{
   As a prospective user
   I want to create an account

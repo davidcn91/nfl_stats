@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Game do
   it { should have_valid(:season).when(2016, 2001, 2010) }
   it { should_not have_valid(:season).when(nil, "", 1900, 0) }

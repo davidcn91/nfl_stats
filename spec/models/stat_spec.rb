@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Stat do
   it { should have_valid(:away_plays).when(40,55,70) }
   it { should_not have_valid(:away_plays).when(nil, "", -5) }

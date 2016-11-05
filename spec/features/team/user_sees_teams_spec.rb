@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'user views teams', %Q{
   As a user
   I want to view a list of items

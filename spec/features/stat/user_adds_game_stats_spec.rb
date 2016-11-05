@@ -1,6 +1,3 @@
-require 'rails_helper'
-require 'support/sign_in_helper'
-
 feature 'user adds game stats', %Q{
   As an authenticated user
   I want to add statistics for a game

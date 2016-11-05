@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 feature 'user views team page', %Q{
   As a user
   I want to view team's page
