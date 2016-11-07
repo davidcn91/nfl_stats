@@ -23,6 +23,7 @@ class StatsController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def edit
     @game = Game.find(params[:game_id])
     @stat = Stat.find(params[:id])
@@ -41,6 +42,15 @@ class StatsController < ApplicationController
     else
       render :edit
     end
+=======
+  def destroy
+    @game = Game.find(params[:game_id])
+    @stat = Stat.find(params[:id])
+    authorize_user(@game)
+    @stat.destroy
+    flash[:notice] = "Game stats deleted successfully!"
+    redirect_to teams_path
+>>>>>>> stats
   end
 
 
