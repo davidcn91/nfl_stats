@@ -16,6 +16,6 @@ class Game < ActiveRecord::Base
   belongs_to :user
   has_one :stat, dependent: :destroy
 
-  SEASONS = (2000..2016).to_a.reverse
+  SEASONS = (2001..2016).to_a.reverse
   WEEKS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
 end

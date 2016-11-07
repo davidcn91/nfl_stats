@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :stats
   end
 
+  resources :seasons
+
   root 'teams#index'
 end

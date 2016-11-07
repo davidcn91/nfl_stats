@@ -1,5 +1,9 @@
 class GamesController < ApplicationController
 
+  def index
+    
+  end
+
   def new
     @game = Game.new
     @season_collection = Game::SEASONS
@@ -25,7 +29,7 @@ class GamesController < ApplicationController
       @game.user_id = current_user.id
       if @game.save
         flash[:notice] = "Game added successfully!"
-        redirect_to teams_path
+        redirect_to new_game_stat_path(@game.id)
       else
         if !@game.away_team.nil?
           @away_team = @game.away_team.name
@@ -79,7 +83,7 @@ class GamesController < ApplicationController
     end
     if @game.save
       flash[:notice] = "Game updated successfully!"
-      redirect_to teams_path
+      redirect_to game_path(@game.id)
     else
       if !@game.away_team.nil?
         @away_team = @game.away_team.name

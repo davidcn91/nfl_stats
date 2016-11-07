@@ -15,6 +15,7 @@ feature 'user deletes game', %Q{
     @user_2 = FactoryGirl.create(:user, team_id: @team_1.id, role: "admin")
     @user_3 = FactoryGirl.create(:user, team_id: @team_1.id)
     @game = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_1.id, home_team_id: @team_2.id)
+    @stat = FactoryGirl.create(:stat, game_id: @game.id)
   end
 
   scenario 'signed in user is the creator of the team' do
@@ -27,6 +28,7 @@ feature 'user deletes game', %Q{
 
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(@game.stat).to be_nil
   end
 
   scenario 'signed in user is an admin' do
@@ -39,6 +41,7 @@ feature 'user deletes game', %Q{
 
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(@game.stat).to be_nil
   end
 
   scenario 'signed in user is not creator of the team' do

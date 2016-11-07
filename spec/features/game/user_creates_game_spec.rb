@@ -29,7 +29,7 @@ feature 'user creates game', %Q{
     click_button 'Submit Game'
 
     expect(page).to have_content("Game added successfully!")
-    expect(page).to have_content("Teams")
+    expect(page).to have_content("Add Stats")
   end
 
   scenario 'user is not signed in' do

@@ -1,9 +1,6 @@
 <h1>Add Stats</h1>
 <h3>
   <%= "#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}" %>
-  <% if user_signed_in? && (current_user.admin? || (current_user.id == @game.user_id)) %>
-    <%= link_to "Edit Game", edit_game_path(@game.id) %>
-  <% end %>
 </h3>
 
 <% @stat.errors.full_messages.each do |error| %>

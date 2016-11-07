@@ -23,9 +23,26 @@ class StatsController < ApplicationController
     end
   end
 
-  def show
-
+  def edit
+    @game = Game.find(params[:game_id])
+    @stat = Stat.find(params[:id])
+    authorize_user(@game)
   end
+
+  def update
+    @game = Game.find(params[:game_id])
+    @stat = Stat.find(params[:id])
+    authorize_user(@game)
+    @stat.update(stat_params)
+    @stat.game_id = @game.id
+    if @stat.save
+      flash[:notice] = "Game stats updated successfully!"
+      redirect_to game_path(@game.id)
+    else
+      render :edit
+    end
+  end
+
 
   protected
 

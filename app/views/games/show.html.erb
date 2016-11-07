@@ -102,4 +102,7 @@
     </tr>
 
   </table>
+  <% if user_signed_in? && ((current_user.id == @game.user_id) || current_user.admin?) %>
+    <%= link_to "Edit Stats", edit_game_stat_path(@game.id, @game.stat.id) %>
+  <% end %>
 <% end %>
