@@ -23,8 +23,13 @@ class StatsController < ApplicationController
     end
   end
 
-  def show
-
+  def destroy
+    @game = Game.find(params[:game_id])
+    @stat = Stat.find(params[:id])
+    authorize_user(@game)
+    @stat.destroy
+    flash[:notice] = "Game stats deleted successfully!"
+    redirect_to teams_path
   end
 
   protected
