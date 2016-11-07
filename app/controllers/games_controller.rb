@@ -56,6 +56,7 @@ class GamesController < ApplicationController
     @header_home_team = @game.home_team
     @header_away_score = @game.away_score
     @header_home_score = @game.home_score
+    @header_overtime = @game.overtime
     @away_team = @game.away_team.name
     @home_team = @game.home_team.name
     @season_collection = Game::SEASONS
@@ -72,6 +73,7 @@ class GamesController < ApplicationController
     @header_home_team = @game.home_team
     @header_away_score = @game.away_score
     @header_home_score = @game.home_score
+    @header_overtime = @game.overtime
     @season_collection = Game::SEASONS
     @week_collection = Game::WEEKS
     @team_collection = Team.pluck(:name).sort

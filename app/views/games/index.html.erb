@@ -11,6 +11,9 @@
               <%= "#{game.away_score} at " %>
               <%= link_to "#{game.home_team.abbreviation}", team_path(game.home_team.id) %>
               <%= "#{game.home_score}" %>
+              <% if game.overtime %>
+                <span> (OT)</span>
+              <% end %>
               <% if !game.stat.nil? %>
                 <%= link_to "Stats", game_path(game.id) %>
               <% elsif user_signed_in? && ((current_user.id == game.user_id) || current_user.admin?) %>
