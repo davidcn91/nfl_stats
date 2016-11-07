@@ -36,6 +36,7 @@ feature 'user adds game stats', %Q{
     fill_in "stat_away_rushes", with: "20"
     fill_in "stat_away_rushing_yards", with: "80"
     fill_in "stat_away_passes", with: "30"
+    fill_in "stat_away_completions", with: "20"
     fill_in "stat_away_passing_yards", with: "300"
     fill_in "stat_away_time_of_possession", with: "32:50"
     fill_in "stat_away_fumbles", with: "1"
@@ -51,6 +52,7 @@ feature 'user adds game stats', %Q{
     fill_in "stat_home_rushes", with: "20"
     fill_in "stat_home_rushing_yards", with: "80"
     fill_in "stat_home_passes", with: "30"
+    fill_in "stat_home_completions", with: "20"
     fill_in "stat_home_passing_yards", with: "300"
     fill_in "stat_home_time_of_possession", with: "32:50"
     fill_in "stat_home_fumbles", with: "1"
@@ -77,6 +79,7 @@ feature 'user adds game stats', %Q{
     fill_in "stat_away_rushes", with: "20"
     fill_in "stat_away_rushing_yards", with: "80"
     fill_in "stat_away_passes", with: "30"
+    fill_in "stat_away_completions", with: "20"
     fill_in "stat_away_passing_yards", with: "300"
     fill_in "stat_away_time_of_possession", with: "32:50"
     fill_in "stat_away_fumbles", with: "1"
@@ -92,6 +95,7 @@ feature 'user adds game stats', %Q{
     fill_in "stat_home_rushes", with: "20"
     fill_in "stat_home_rushing_yards", with: "80"
     fill_in "stat_home_passes", with: "30"
+    fill_in "stat_home_completions", with: "20"
     fill_in "stat_home_passing_yards", with: "300"
     fill_in "stat_home_time_of_possession", with: "32:50"
     fill_in "stat_home_fumbles", with: "1"
@@ -120,6 +124,7 @@ feature 'user adds game stats', %Q{
     fill_in "stat_away_rushes", with: "20"
     fill_in "stat_away_rushing_yards", with: "80"
     fill_in "stat_away_passes", with: "30"
+    fill_in "stat_away_completions", with: "40"
     fill_in "stat_away_passing_yards", with: "300"
     fill_in "stat_away_time_of_possession", with: "32:50"
     fill_in "stat_away_fumbles", with: "1"
@@ -135,6 +140,7 @@ feature 'user adds game stats', %Q{
     fill_in "stat_home_rushes", with: "20"
     fill_in "stat_home_rushing_yards", with: "80"
     fill_in "stat_home_passes", with: "30"
+    fill_in "stat_home_completions", with: "20"
     fill_in "stat_home_passing_yards", with: "300"
     fill_in "stat_home_time_of_possession", with: "32:50"
     fill_in "stat_home_fumbles", with: "1"
@@ -146,6 +152,7 @@ feature 'user adds game stats', %Q{
     expect(page).to have_content("Away plays can't be fewer than rushes plus passes")
     expect(page).to have_content("Away third down attempts can't be fewer than third down conversions")
     expect(page).to have_content("Away fumbles can't be fewer than fumbles lost")
+    expect(page).to have_content("Away passes can't be fewer than completions")
   end
 
   scenario 'signed in user is not creator of the team' do

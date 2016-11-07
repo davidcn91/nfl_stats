@@ -5,6 +5,7 @@ FactoryGirl.define do
     away_rushes 20
     away_rushing_yards 100
     away_passes 30
+    away_completions 20
     away_passing_yards 300
     away_third_down_conversions 5
     away_third_down_attempts 12
@@ -19,6 +20,7 @@ FactoryGirl.define do
     home_rushes 20
     home_rushing_yards 100
     home_passes 30
+    home_completions 20
     home_passing_yards 300
     home_third_down_conversions 5
     home_third_down_attempts 12

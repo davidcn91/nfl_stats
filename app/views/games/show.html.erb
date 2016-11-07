@@ -40,14 +40,9 @@
       <td colspan="3"></td>
     </tr>
     <tr>
-      <td>Rushing Attempts</td>
-      <td><%= @game.stat.away_rushes %></td>
-      <td><%= @game.stat.home_rushes %></td>
-    </tr>
-    <tr>
-      <td>Rushing Yards</td>
-      <td><%= @game.stat.away_rushing_yards %></td>
-      <td><%= @game.stat.home_rushing_yards %></td>
+      <td>Rushing Attempts - Yards</td>
+      <td><%= "#{@game.stat.away_rushes} -  #{@game.stat.away_rushing_yards}" %></td>
+      <td><%= "#{@game.stat.home_rushes} -  #{@game.stat.home_rushing_yards}" %></td>
     </tr>
     <tr>
       <td>Yards per Rush</td>
@@ -58,9 +53,9 @@
       <td colspan="3"></td>
     </tr>
     <tr>
-      <td>Passing Attempts</td>
-      <td><%= @game.stat.away_passes %></td>
-      <td><%= @game.stat.home_passes %></td>
+      <td>Passing Completions / Attempts</td>
+      <td><%= "#{@game.stat.away_completions} / #{@game.stat.away_passes}" %></td>
+      <td><%= "#{@game.stat.home_completions} / #{@game.stat.home_passes}" %></td>
     </tr>
     <tr>
       <td>Passing Yards</td>
