@@ -13,7 +13,12 @@
             <%= link_to "#{game.away_team.name}", team_path(game.away_team.id) %>
             <%= "#{game.away_score} at " %>
             <%= link_to "#{game.home_team.name}", team_path(game.home_team.id) %>
-            <%= "#{game.home_score}" %>
+            <%= "#{game.home_score} " %>
+            <% if game.spread >= 0 %>
+              <%= "(+#{game.spread})" %>
+            <% else %>
+              <%= "(#{game.spread})" %>
+            <% end %>
             <% if game.overtime? %>
               <span> (OT)</span>
             <% end %>

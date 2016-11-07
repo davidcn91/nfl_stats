@@ -58,9 +58,11 @@ feature 'user creates game', %Q{
     fill_in 'Away Score', with: '27'
     fill_in 'Home Score', with: '14'
     fill_in 'Spread', with: '4'
+    check 'Overtime'
     click_button 'Submit Game'
 
     expect(page).to have_content("Away team can't be the same as home team")
+    expect(page).to have_content("Overtime game margin must be 0, 2, 3, or 6")
 
     select @team_1.name, from: 'game_away_team_id'
     select @team_2.name, from: 'game_home_team_id'
