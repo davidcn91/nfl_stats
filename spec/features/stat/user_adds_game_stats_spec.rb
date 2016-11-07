@@ -24,7 +24,7 @@ feature 'user adds game stats', %Q{
   scenario "signed in user is the creator of the game and provides valid information" do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     click_link "Add Stats"
 
     fill_in "stat_away_plays", with: "50"
@@ -67,7 +67,7 @@ feature 'user adds game stats', %Q{
   scenario 'signed in user is an admin' do
     sign_in(@user_2)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     click_link "Add Stats"
 
     fill_in "stat_away_plays", with: "50"
@@ -158,7 +158,7 @@ feature 'user adds game stats', %Q{
   scenario 'signed in user is not creator of the team' do
     sign_in(@user_3)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     expect(page).to_not have_link("Add Stats")
     expect{visit new_game_stat_path(@game.id)}.to raise_error(ActionController::RoutingError)
   end
@@ -166,7 +166,7 @@ feature 'user adds game stats', %Q{
   scenario 'user is not signed in' do
     visit root_path
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     expect(page).to_not have_link("Add Stats")
     expect{visit new_game_stat_path(@game.id)}.to raise_error(ActionController::RoutingError)
   end

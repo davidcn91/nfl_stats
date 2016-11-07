@@ -1,1 +1,29 @@
-<h1>2016</h1>
+<h1><%= @season %></h1>
+
+<ul>
+  <% (1..17).to_a.each do |week| %>
+    <li><%= "Week #{week}" %>
+      <ul>
+        <% @games.each do |game| %>
+          <% if game.week == week %>
+            <li>
+              <%= link_to "#{game.away_team.abbreviation}", team_path(game.away_team.id) %>
+              <%= "#{game.away_score} at " %>
+              <%= link_to "#{game.home_team.abbreviation}", team_path(game.home_team.id) %>
+              <%= "#{game.home_score}" %>
+              <% if !game.stat.nil? %>
+                <%= link_to "Stats", game_path(game.id) %>
+              <% elsif user_signed_in? && ((current_user.id == game.user_id) || current_user.admin?) %>
+                <%= link_to "Add Stats", new_game_stat_path(game.id) %>
+              <% end %>
+              <% if user_signed_in? && ((current_user.id == game.user_id) || current_user.role == "admin") %>
+                <br /><%= link_to "Edit Game", edit_game_path(game.id) %>
+                <%= button_to "Delete Game", game, method: :delete %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>

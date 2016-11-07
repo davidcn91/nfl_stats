@@ -21,40 +21,40 @@ feature 'user deletes game', %Q{
   scenario 'signed in user is the creator of the team' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
 
     click_button "Delete Game"
     expect(page).to have_content("Game deleted successfully!")
 
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     expect(@game.stat).to be_nil
   end
 
   scenario 'signed in user is an admin' do
     sign_in(@user_2)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
 
     click_button "Delete Game"
     expect(page).to have_content("Game deleted successfully!")
 
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to_not have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     expect(@game.stat).to be_nil
   end
 
   scenario 'signed in user is not creator of the team' do
     sign_in(@user_3)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     expect(page).to_not have_button("Delete Game")
   end
 
   scenario 'user is not signed in' do
     visit root_path
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     expect(page).to_not have_button("Delete Game")
   end
 end

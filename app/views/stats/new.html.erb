@@ -1,6 +1,14 @@
 <h1>Add Stats</h1>
 <h3>
-  <%= "#{@game.season} Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}" %>
+  <%= link_to @game.season, games_path(season: @game.season) %>
+  <%= "Week #{@game.week}: " %>
+  <%= link_to @game.away_team.name, team_path(@game.away_team.id) %>
+  <%= "#{@game.away_score} at " %>
+  <%= link_to @game.home_team.name, team_path(@game.home_team.id) %>
+  <%= @game.home_score %>
+  <% if @game.overtime? %>
+    <span> (OT)</span>
+  <% end %>
   <% if user_signed_in? && (current_user.admin? || (current_user.id == @game.user_id)) %>
     <%= link_to "Edit Game", edit_game_path(@game.id) %>
   <% end %>

@@ -1,7 +1,8 @@
 class GamesController < ApplicationController
 
   def index
-    
+    @season = params[:season]
+    @games = Game.where(season: @season)
   end
 
   def new
@@ -105,7 +106,7 @@ class GamesController < ApplicationController
 
   protected
   def game_params
-    params.require(:game).permit(:season, :week, :away_team_id, :home_team_id, :away_score, :home_score, :spread)
+    params.require(:game).permit(:season, :week, :away_team_id, :home_team_id, :away_score, :home_score, :overtime, :spread)
   end
 
   def authorize_user(game)

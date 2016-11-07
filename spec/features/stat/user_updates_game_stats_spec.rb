@@ -136,7 +136,7 @@ feature 'user updates game stats', %Q{
   scenario 'signed in user is not creator of the team' do
     sign_in(@user_3)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     click_link "Stats"
     expect(page).to_not have_link("Edit Stats")
     expect{visit edit_game_stat_path(@game.id, @game.stat.id)}.to raise_error(ActionController::RoutingError)
@@ -145,7 +145,7 @@ feature 'user updates game stats', %Q{
   scenario 'user is not signed in' do
     visit root_path
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} @ #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
     click_link "Stats"
     expect(page).to_not have_link("Edit Stats")
     expect{visit edit_game_stat_path(@game.id, @game.stat.id)}.to raise_error(ActionController::RoutingError)

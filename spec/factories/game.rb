@@ -5,5 +5,6 @@ FactoryGirl.define do
     away_score 7
     home_score 10
     spread 3
+    overtime false
   end
 end

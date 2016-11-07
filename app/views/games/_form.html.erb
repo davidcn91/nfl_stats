@@ -33,6 +33,11 @@
   </div>
 
   <div class="row">
+    <%= f.label :overtime, "Overtime" %>
+    <%= f.check_box(:overtime) %>
+  </div>
+
+  <div class="row">
     <%= f.label :spread %> <i>(From perspective of the HOME TEAM)</i>
     <%= f.text_field :spread %>
   </div>
