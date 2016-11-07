@@ -26,6 +26,9 @@ RSpec.describe Stat do
   it { should have_valid(:away_passes).when(15,20,30) }
   it { should_not have_valid(:away_passes).when(nil, "", -5) }
 
+  it { should have_valid(:away_completions).when(15,20,30) }
+  it { should_not have_valid(:away_completions).when(nil, "", -5) }
+
   it { should have_valid(:away_passing_yards).when(200,400,450) }
   it { should_not have_valid(:away_passing_yards).when(nil, "") }
 
@@ -67,6 +70,9 @@ RSpec.describe Stat do
 
   it { should have_valid(:home_passes).when(15,20,30) }
   it { should_not have_valid(:home_passes).when(nil, "", -5) }
+
+  it { should have_valid(:home_completions).when(15,20,30) }
+  it { should_not have_valid(:home_completions).when(nil, "", -5) }
 
   it { should have_valid(:home_passing_yards).when(200,400,450) }
   it { should_not have_valid(:home_passing_yards).when(nil, "") }
