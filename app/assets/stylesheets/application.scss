@@ -1,2 +1,9 @@
-// @import "*";
+nav li {
+  list-style-type: none;
+  text-align: right;
+}
 
+nav:first-child {
+  position: absolute;
+  right: 20px;
+}

@@ -5,6 +5,26 @@
   <%= link_to ("#{@game.home_team.location} #{@game.home_team.name}"), team_path(@game.home_team_id) %>
   <%= " #{@game.home_score}" %>
 </h1>
+<p>
+  <span>Betting Line: </span>
+  <% if @game.spread < 0 %>
+    <%= "#{@game.home_team.abbreviation} #{@game.spread}" %>
+  <% elsif @game.spread > 0 %>
+    <%= "#{@game.away_team.abbreviation} -#{@game.spread}" %>
+  <% else %>
+    <span>PICK</span>
+  <% end %>
+</p>
+<p>
+  <span>Winner (against the spread): </span>
+  <% if (@game.away_score - @game.home_score) > @game.spread %>
+    <%= @game.away_team.abbreviation %>
+  <% elsif (@game.away_score - @game.home_score) < @game.spread %>
+    <%= @game.home_team.abbreviation %>
+  <% else %>
+    <span>PUSH</span>
+  <% end %>
+</p>
 
 <% if @game.stat.nil? %>
   <h3>
