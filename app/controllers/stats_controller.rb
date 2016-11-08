@@ -1,5 +1,13 @@
 class StatsController < ApplicationController
 
+  def index
+    if params[:sort].nil?
+      @teams = Team.all
+    else
+      @teams = Team.all.sort_by {|team| team.send(params[:sort])}.reverse
+    end
+  end
+
   def new
     @game = Game.find(params[:game_id])
     authorize_user(@game)
