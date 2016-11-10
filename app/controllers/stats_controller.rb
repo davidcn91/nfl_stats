@@ -1,11 +1,38 @@
 class StatsController < ApplicationController
 
   def index
-    if params[:sort].nil?
+    if params[:side].nil?
+      @side = "offense"
+    else
+      @side = params[:side]
+    end
+    @sort = params[:sort]
+    if @sort.nil?
       @teams = Team.all
     else
-      @teams = Team.all.sort_by {|team| team.send(params[:sort])}.reverse
+      if (@sort == params[:current_sort]) && params[:order] == "desc"
+        @order = "asc"
+      else
+        @order = "desc"
+      end
+      if ["name", "games"].include?(@sort)
+        @teams = Team.all.sort_by {|team| (team.send(@sort))}
+      else
+        @teams = Team.all.sort_by {|team| (team.send(@sort,(@side)))}
+      end
+      if @order == "desc"
+        @teams.reverse!
+      end
+      if @sort == "name"
+        @teams.reverse!
+      end
     end
+
+    @categories = [["Team","name"],["G","games"],["Points","points"],["Pts/Gm","points_per_game"],
+  ["Plays","plays"],["Plays/Gm","plays_per_game"],["Yards","yards"],["Yds/Gm","yards_per_game"],["Yds/Play","yards_per_play"],
+["3rd Conv","third_down_conversions"],["3rd Att","third_down_attempts"],["3rd Pct","third_down_percentage"],
+["Penalties","penalties"],["Pen Yards","penaty_yards"],["Pen Yds/G","penalty_yards_per_game"],["Fumbles","fumbles"],
+["Fum Lost","fumbles_lost"],["INT","interceptions"],["Turnovers","turnovers"],["TO/G","turnovers_per_game"]]
   end
 
   def new

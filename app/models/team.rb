@@ -24,111 +24,155 @@ class Team < ActiveRecord::Base
     game_stats.length
   end
 
-  def points
+  def points(side)
     points = 0
     game_stats.each do |game|
       if name == game.away_team.name
-        points += game.away_score
+        if (side == "offense")
+          points += game.away_score
+        else
+          points += game.home_score
+        end
       else
-        points += game.home_score
+        if (side == "offense")
+          points += game.home_score
+        else
+          points += game.away_score
+        end
       end
     end
     points
   end
 
-  def points_per_game
+  def points_per_game(side)
     if games == 0
       0
     else
-      (points.to_f/games)
+      (points(side).to_f/games)
     end
   end
 
-  def plays
-    calculate_stat("plays")
+  def plays(side)
+    if (side == "offense")
+      calculate_stat("plays")
+    else
+      calculate_stat_allowed("plays")
+    end
   end
 
-  def plays_per_game
+  def plays_per_game(side)
     if games == 0
       0
     else
-      (plays.to_f/games)
+      (plays(side).to_f/games)
     end
   end
 
-  def yards
-    calculate_stat("yards")
+  def yards(side)
+    if (side == "offense")
+      calculate_stat("yards")
+    else
+      calculate_stat_allowed("yards")
+    end
   end
 
-  def yards_per_game
+  def yards_per_game(side)
     if games == 0
       0
     else
-      (yards.to_f/games)
+      (yards(side).to_f/games)
     end
   end
 
-  def yards_per_play
-    if plays == 0
+  def yards_per_play(side)
+    if plays(side) == 0
       0
     else
-      (yards.to_f/plays)
+      (yards(side).to_f/plays(side))
     end
   end
 
-  def third_down_conversions
-    calculate_stat("third_down_conversions")
+  def third_down_conversions(side)
+    if (side == "offense")
+      calculate_stat("third_down_conversions")
+    else
+      calculate_stat_allowed("third_down_conversions")
+    end
   end
 
-  def third_down_attempts
-    calculate_stat("third_down_attempts")
+  def third_down_attempts(side)
+    if (side == "offense")
+      calculate_stat("third_down_attempts")
+    else
+      calculate_stat_allowed("third_down_attempts")
+    end
   end
 
-  def third_down_percentage
-    if third_down_attempts == 0
+  def third_down_percentage(side)
+    if third_down_attempts(side) == 0
       0
     else
-      ((third_down_conversions.to_f)/third_down_attempts) * 100
+      ((third_down_conversions(side).to_f)/third_down_attempts(side)) * 100
     end
   end
 
-  def penalties
-    calculate_stat("penalties")
+  def penalties(side)
+    if (side == "offense")
+      calculate_stat("penalties")
+    else
+      calculate_stat_allowed("penalties")
+    end
   end
 
-  def penalty_yards
-    calculate_stat("penalty_yards")
+  def penalty_yards(side)
+    if (side == "offense")
+      calculate_stat("penalty_yards")
+    else
+      calculate_stat_allowed("penalty_yards")
+    end
   end
 
-  def penalty_yards_per_game
+  def penalty_yards_per_game(side)
     if games == 0
       0
     else
-      (penalty_yards.to_f/games)
+      (penalty_yards(side).to_f/games)
     end
   end
 
-  def fumbles
-    calculate_stat("fumbles")
+  def fumbles(side)
+    if (side == "offense")
+      calculate_stat("fumbles")
+    else
+      calculate_stat_allowed("fumbles")
+    end
   end
 
-  def fumbles_lost
-    calculate_stat("fumbles_lost")
+  def fumbles_lost(side)
+    if (side == "offense")
+      calculate_stat("fumbles_lost")
+    else
+      calculate_stat_allowed("fumbles_lost")
+    end
   end
 
-  def interceptions
-    calculate_stat("interceptions")
+  def interceptions(side)
+    if (side == "offense")
+      calculate_stat("interceptions")
+    else
+      calculate_stat_allowed("interceptions")
+    end
   end
 
-  def turnovers
-    fumbles_lost + interceptions
+  def turnovers(side)
+    fumbles_lost(side) + interceptions(side)
   end
 
-  def turnovers_per_game
+  def turnovers_per_game(side)
     if games == 0
       0
     else
-      (turnovers.to_f/games)
+      (turnovers(side).to_f/games)
     end
   end
 
@@ -144,42 +188,16 @@ class Team < ActiveRecord::Base
     total
   end
 
-  # @teams.each do |team|
-  #   games = game_stats(team)
-  #   points = 0
-  #   plays = 0
-  #   yards = 0
-  #   third_conv = 0
-  #   third_att = 0
-  #   penalties = 0
-  #   penalty_yards = 0
-  #   fumbles = 0
-  #   fumbles_lost = 0
-  #   interceptions = 0
-  #   games.each do |game|
-  #     if game.away_team.name == team.name
-  #       points += game.away_score
-  #       plays += game.stat.away_plays
-  #       yards += game.stat.away_yards
-  #       third_conv += game.stat.away_third_down_conversions
-  #       third_att += game.stat.away_third_down_attempts
-  #       penalties += game.stat.away_penalties
-  #       penalty_yards += game.stat.away_penalty_yards
-  #       fumbles += game.stat.away_fumbles
-  #       fumbles_lost += game.stat.away_fumbles_lost
-  #       interceptions += game.stat.away_interceptions
-  #     else
-  #       points += game.home_score
-  #       plays += game.stat.home_plays
-  #       yards += game.stat.home_yards
-  #       third_conv += game.stat.home_third_down_conversions
-  #       third_att += game.stat.home_third_down_attempts
-  #       penalties += game.stat.home_penalties
-  #       penalty_yards += game.stat.home_penalty_yards
-  #       fumbles += game.stat.home_fumbles
-  #       fumbles_lost += game.stat.home_fumbles_lost
-  #       interceptions += game.stat.home_interceptions
-  #     end
-  #   end
-  # end
+  def calculate_stat_allowed(statistic)
+    total = 0
+    game_stats.each do |game|
+      if name == game.away_team.name
+        total += game.stat.send("home_#{statistic}")
+      else
+        total += game.stat.send("away_#{statistic}")
+      end
+    end
+    total
+  end
+
 end

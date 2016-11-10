@@ -24,7 +24,7 @@ feature 'user updates game stats', %Q{
   scenario "signed in user is the creator of the game and provides valid information" do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    click_link "Stats"
+    click_link "Game Stats"
     click_link "Edit Stats"
     fill_in "stat_away_plays", with: "100"
     fill_in "stat_away_yards", with: "700"
@@ -53,7 +53,7 @@ feature 'user updates game stats', %Q{
   scenario 'signed in user is an admin' do
     sign_in(@user_2)
     click_link "#{@team_1.location} #{@team_1.name}"
-    click_link "Stats"
+    click_link "Game Stats"
     click_link "Edit Stats"
     fill_in "stat_away_plays", with: "100"
     fill_in "stat_away_yards", with: "700"
@@ -82,7 +82,7 @@ feature 'user updates game stats', %Q{
   scenario 'authenticated user supplies invalid information' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    click_link "Stats"
+    click_link "Game Stats"
     click_link "Edit Stats"
 
     fill_in "stat_away_plays", with: ""
@@ -137,7 +137,7 @@ feature 'user updates game stats', %Q{
     sign_in(@user_3)
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
-    click_link "Stats"
+    click_link "Game Stats"
     expect(page).to_not have_link("Edit Stats")
     expect{visit edit_game_stat_path(@game.id, @game.stat.id)}.to raise_error(ActionController::RoutingError)
   end
@@ -146,7 +146,7 @@ feature 'user updates game stats', %Q{
     visit root_path
     click_link "#{@team_1.location} #{@team_1.name}"
     expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
-    click_link "Stats"
+    click_link "Game Stats"
     expect(page).to_not have_link("Edit Stats")
     expect{visit edit_game_stat_path(@game.id, @game.stat.id)}.to raise_error(ActionController::RoutingError)
   end
