@@ -1,6 +1,6 @@
 feature 'user sees game', %Q{
   As a user
-  I want to see game's information
+  I want to see a game's information
   So that I can find statistics and game details
 } do
 
@@ -22,7 +22,7 @@ feature 'user sees game', %Q{
     @stat = FactoryGirl.create(:stat, game_id: @game_1.id)
   end
 
-  scenario 'user view game that has stats' do
+  scenario 'user views game that has stats' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
     click_link "Game Stats"
