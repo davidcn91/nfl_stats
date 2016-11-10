@@ -31,9 +31,8 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <%= link_to 'Home', teams_path %><br/>
-    <%= link_to 'Stats', stats_path(side: "Offense") %>
+    <%= link_to 'Stats', stats_path(side: "offense") %>
     <%= yield %>
-    <p><%= link_to 'Stats', stats_path %></p>
     <% if user_signed_in? %>
       <p><%= link_to 'Add Game', new_game_path %></p>
     <% end %>
