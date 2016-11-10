@@ -10,23 +10,23 @@ class Team < ActiveRecord::Base
   DIVISIONS = ["NFC East", "NFC North", "NFC South", "NFC West",
   "AFC East", "AFC North", "AFC South", "AFC West"]
 
-  def game_stats
+  def game_stats(season)
     games = []
     (away_games + home_games).each do |game|
-      if !game.stat.nil?
+      if !game.stat.nil? && ((game.season == season.to_i) || season == "2001-2016")
         games << game
       end
     end
     games
   end
 
-  def games
-    game_stats.length
+  def games(season)
+    game_stats(season).length
   end
 
-  def points(side)
+  def points(season,side)
     points = 0
-    game_stats.each do |game|
+    game_stats(season).each do |game|
       if name == game.away_team.name
         if (side == "offense")
           points += game.away_score
@@ -44,141 +44,141 @@ class Team < ActiveRecord::Base
     points
   end
 
-  def points_per_game(side)
-    if games == 0
+  def points_per_game(season,side)
+    if games(season) == 0
       0
     else
-      (points(side).to_f/games)
+      (points(season,side).to_f/games(season))
     end
   end
 
-  def plays(side)
+  def plays(season,side)
     if (side == "offense")
-      calculate_stat("plays")
+      calculate_stat(season,"plays")
     else
-      calculate_stat_allowed("plays")
+      calculate_stat_allowed(season,"plays")
     end
   end
 
-  def plays_per_game(side)
-    if games == 0
+  def plays_per_game(season,side)
+    if games(season) == 0
       0
     else
-      (plays(side).to_f/games)
+      (plays(season,side).to_f/games(season))
     end
   end
 
-  def yards(side)
+  def yards(season,side)
     if (side == "offense")
-      calculate_stat("yards")
+      calculate_stat(season,"yards")
     else
-      calculate_stat_allowed("yards")
+      calculate_stat_allowed(season,"yards")
     end
   end
 
-  def yards_per_game(side)
-    if games == 0
+  def yards_per_game(season,side)
+    if games(season) == 0
       0
     else
-      (yards(side).to_f/games)
+      (yards(season,side).to_f/games(season))
     end
   end
 
-  def yards_per_play(side)
-    if plays(side) == 0
+  def yards_per_play(season,side)
+    if plays(season,side) == 0
       0
     else
-      (yards(side).to_f/plays(side))
+      (yards(season,side).to_f/plays(season,side))
     end
   end
 
-  def third_down_conversions(side)
+  def third_down_conversions(season,side)
     if (side == "offense")
-      calculate_stat("third_down_conversions")
+      calculate_stat(season,"third_down_conversions")
     else
-      calculate_stat_allowed("third_down_conversions")
+      calculate_stat_allowed(season,"third_down_conversions")
     end
   end
 
-  def third_down_attempts(side)
+  def third_down_attempts(season,side)
     if (side == "offense")
-      calculate_stat("third_down_attempts")
+      calculate_stat(season,"third_down_attempts")
     else
-      calculate_stat_allowed("third_down_attempts")
+      calculate_stat_allowed(season,"third_down_attempts")
     end
   end
 
-  def third_down_percentage(side)
-    if third_down_attempts(side) == 0
+  def third_down_percentage(season,side)
+    if third_down_attempts(season,side) == 0
       0
     else
-      ((third_down_conversions(side).to_f)/third_down_attempts(side)) * 100
+      ((third_down_conversions(season,side).to_f)/third_down_attempts(season,side)) * 100
     end
   end
 
-  def penalties(side)
+  def penalties(season,side)
     if (side == "offense")
-      calculate_stat("penalties")
+      calculate_stat(season,"penalties")
     else
-      calculate_stat_allowed("penalties")
+      calculate_stat_allowed(season,"penalties")
     end
   end
 
-  def penalty_yards(side)
+  def penalty_yards(season,side)
     if (side == "offense")
-      calculate_stat("penalty_yards")
+      calculate_stat(season,"penalty_yards")
     else
-      calculate_stat_allowed("penalty_yards")
+      calculate_stat_allowed(season,"penalty_yards")
     end
   end
 
-  def penalty_yards_per_game(side)
-    if games == 0
+  def penalty_yards_per_game(season,side)
+    if games(season) == 0
       0
     else
-      (penalty_yards(side).to_f/games)
+      (penalty_yards(season,side).to_f/games(season))
     end
   end
 
-  def fumbles(side)
+  def fumbles(season,side)
     if (side == "offense")
-      calculate_stat("fumbles")
+      calculate_stat(season,"fumbles")
     else
-      calculate_stat_allowed("fumbles")
+      calculate_stat_allowed(season,"fumbles")
     end
   end
 
-  def fumbles_lost(side)
+  def fumbles_lost(season,side)
     if (side == "offense")
-      calculate_stat("fumbles_lost")
+      calculate_stat(season,"fumbles_lost")
     else
-      calculate_stat_allowed("fumbles_lost")
+      calculate_stat_allowed(season,"fumbles_lost")
     end
   end
 
-  def interceptions(side)
+  def interceptions(season,side)
     if (side == "offense")
-      calculate_stat("interceptions")
+      calculate_stat(season,"interceptions")
     else
-      calculate_stat_allowed("interceptions")
+      calculate_stat_allowed(season,"interceptions")
     end
   end
 
-  def turnovers(side)
-    fumbles_lost(side) + interceptions(side)
+  def turnovers(season,side)
+    fumbles_lost(season,side) + interceptions(season,side)
   end
 
-  def turnovers_per_game(side)
-    if games == 0
+  def turnovers_per_game(season,side)
+    if games(season) == 0
       0
     else
-      (turnovers(side).to_f/games)
+      (turnovers(season,side).to_f/games(season))
     end
   end
 
-  def calculate_stat(statistic)
+  def calculate_stat(season, statistic)
     total = 0
-    game_stats.each do |game|
+    game_stats(season).each do |game|
       if name == game.away_team.name
         total += game.stat.send("away_#{statistic}")
       else
@@ -188,9 +188,9 @@ class Team < ActiveRecord::Base
     total
   end
 
-  def calculate_stat_allowed(statistic)
+  def calculate_stat_allowed(season, statistic)
     total = 0
-    game_stats.each do |game|
+    game_stats(season).each do |game|
       if name == game.away_team.name
         total += game.stat.send("home_#{statistic}")
       else

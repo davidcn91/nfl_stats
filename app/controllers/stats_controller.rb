@@ -1,12 +1,22 @@
 class StatsController < ApplicationController
 
   def index
+    @season_collection = ["2001-2016"] + Game::SEASONS
+    @sort = params[:sort]
+    if !params[:Season].nil?
+      @season = params[:Season][:season]
+    elsif !params[:season].nil?
+      @season = params[:season]
+    else
+      @season = "2001-2016"
+    end
+
     if params[:side].nil?
       @side = "offense"
     else
       @side = params[:side]
     end
-    @sort = params[:sort]
+
     if @sort.nil?
       @teams = Team.all
     else
@@ -15,19 +25,17 @@ class StatsController < ApplicationController
       else
         @order = "desc"
       end
-      if ["name", "games"].include?(@sort)
-        @teams = Team.all.sort_by {|team| (team.send(@sort))}
+      if (@sort == "name")
+        @teams = Team.all.sort_by {|team| (team.send(@sort))}.reverse
+      elsif (@sort == "games")
+        @teams = Team.all.sort_by {|team| (team.send(@sort,@season))}
       else
-        @teams = Team.all.sort_by {|team| (team.send(@sort,(@side)))}
+        @teams = Team.all.sort_by {|team| (team.send(@sort,@season,@side))}
       end
       if @order == "desc"
         @teams.reverse!
       end
-      if @sort == "name"
-        @teams.reverse!
-      end
     end
-
     @categories = [["Team","name"],["G","games"],["Points","points"],["Pts/Gm","points_per_game"],
   ["Plays","plays"],["Plays/Gm","plays_per_game"],["Yards","yards"],["Yds/Gm","yards_per_game"],["Yds/Play","yards_per_play"],
 ["3rd Conv","third_down_conversions"],["3rd Att","third_down_attempts"],["3rd Pct","third_down_percentage"],
