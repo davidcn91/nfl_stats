@@ -1,4 +1,4 @@
-feature 'user sees game', %Q{
+feature 'user sees game stats', %Q{
   As a user
   I want to see a game's information
   So that I can find statistics and game details

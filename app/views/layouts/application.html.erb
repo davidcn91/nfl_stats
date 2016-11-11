@@ -37,8 +37,8 @@
     <% else %>
       <% @season_selected = @seasons[0] %>
     <% end %>
-    <%= form_for "Season", url: games_path, method: :get do |f| %>
-      <%= f.label :seasons, "Games by Season" %>
+    <%= form_for :games_by_season, url: games_path, method: :get do |f| %>
+      <%= f.label :games_by_season, "Games by Season" %>
       <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
       <%= f.submit "Go" %>
     <% end %>

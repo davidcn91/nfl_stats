@@ -32,7 +32,7 @@
                       <span> (OT)</span>
                     <% end %>
                     <% if !game.stat.nil? %>
-                      <%= link_to "Stats", game_path(game.id) %>
+                      <%= link_to "Game Stats", game_path(game.id) %>
                     <% elsif user_signed_in? && ((current_user.id == game.user_id) || current_user.admin?) %>
                       <%= link_to "Add Stats", new_game_stat_path(game.id) %>
                     <% end %>

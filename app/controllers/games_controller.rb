@@ -3,8 +3,8 @@ class GamesController < ApplicationController
   def index
     if params[:season]
       @seasons = [params[:season].to_i]
-    elsif params[:Season] && (params[:Season][:season] != "2001-2016")
-      @seasons = [params[:Season][:season].to_i]
+    elsif params[:games_by_season] && (params[:games_by_season][:season] != "2001-2016")
+      @seasons = [params[:games_by_season][:season].to_i]
     else
       @seasons = @season_collection
     end
