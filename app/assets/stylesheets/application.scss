@@ -3,6 +3,10 @@ nav li {
   text-align: right;
 }
 
+li {
+  list-style-type: none;
+}
+
 nav:first-child {
   position: absolute;
   right: 20px;
