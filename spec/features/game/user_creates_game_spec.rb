@@ -82,4 +82,30 @@ feature 'user creates game', %Q{
     expect(page).to have_content("Home score must be greater than or equal to 0")
   end
 
+  scenario 'authenticated user enters team who already has a game for the entered week' do
+    sign_in(@user)
+    click_link 'Add Game'
+    select 2015, from: 'Season'
+    select 4, from: 'Week'
+    select @team_1.name, from: 'game_away_team_id'
+    select @team_2.name, from: 'game_home_team_id'
+    fill_in 'Away Score', with: '27'
+    fill_in 'Home Score', with: '14'
+    fill_in 'Spread', with: '4'
+    click_button 'Submit Game'
+
+    click_link 'Add Game'
+    select 2015, from: 'Season'
+    select 4, from: 'Week'
+    select @team_1.name, from: 'game_away_team_id'
+    select @team_2.name, from: 'game_home_team_id'
+    fill_in 'Away Score', with: '30'
+    fill_in 'Home Score', with: '16'
+    fill_in 'Spread', with: '4'
+    click_button 'Submit Game'
+
+    expect(page).to_not have_content("Game added successfully!")
+    expect(page).to have_content("Away team already has game entered this week")
+    expect(page).to have_content("Home team already has game entered this week")
+  end
 end

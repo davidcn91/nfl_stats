@@ -3,7 +3,8 @@ class Game < ActiveRecord::Base
   validates :away_score, :home_score, numericality: { greater_than_or_equal_to: 0 }
   validates :season, numericality: { greater_than_or_equal_to: 2001, less_than_or_equal_to: 2016 }
   validates :week, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 17 }
-  validate :teams_cannot_be_same, :overtime_game_margin
+  validate :teams_cannot_be_same, :away_team_cannot_have_multiple_games_in_same_week,
+  :home_team_cannot_have_multiple_games_in_same_week, :overtime_game_margin
 
 
   belongs_to :away_team, class_name: 'Team', foreign_key: 'away_team_id'
@@ -18,6 +19,26 @@ class Game < ActiveRecord::Base
   def teams_cannot_be_same
     if away_team_id == home_team_id
       errors.add(:away_team_id, "can't be the same as home team")
+    end
+  end
+
+  def away_team_cannot_have_multiple_games_in_same_week
+    if !away_team.nil?
+      (away_team.away_games + away_team.home_games).each do |game|
+        if ((game.season == season) && (game.week == week))
+          errors.add(:away_team, "already has game entered this week")
+        end
+      end
+    end
+  end
+
+  def home_team_cannot_have_multiple_games_in_same_week
+    if !home_team.nil?
+      (home_team.away_games + home_team.home_games).each do |game|
+        if ((game.season == season) && (game.week == week))
+          errors.add(:home_team, "already has game entered this week")
+        end
+      end
     end
   end
 

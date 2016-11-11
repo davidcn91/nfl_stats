@@ -18,7 +18,7 @@ feature 'user sees game', %Q{
     @user_2 = FactoryGirl.create(:user, team_id: @team_1.id, role: "admin")
     @user_3 = FactoryGirl.create(:user, team_id: @team_1.id)
     @game_1 = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_1.id, home_team_id: @team_2.id)
-    @game_2 = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_2.id, home_team_id: @team_3.id)
+    @game_2 = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_2.id, home_team_id: @team_3.id, week: 6)
     @stat = FactoryGirl.create(:stat, game_id: @game_1.id)
   end
 
