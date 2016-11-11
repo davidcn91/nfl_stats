@@ -1,19 +1,32 @@
 class GamesController < ApplicationController
 
   def index
-    @season = params[:season]
-    @games = Game.where(season: @season)
+    if params[:season]
+      @seasons = [params[:season].to_i]
+    elsif params[:Season] && (params[:Season][:season] != "2001-2016")
+      @seasons = [params[:Season][:season].to_i]
+    else
+      @seasons = @season_collection
+    end
+    if @seasons == @season_collection
+      @games = Game.all
+    else
+      @games = Game.where(season: @seasons[0])
+    end
+    if @seasons.nil? || (@seasons.length > 1)
+      @season_selected = "2001-2016"
+    else
+      @season_selected = @seasons[0]
+    end
   end
 
   def new
     @game = Game.new
-    @season_collection = Game::SEASONS
     @week_collection = Game::WEEKS
     @team_collection = Team.pluck(:name).sort
   end
 
   def create
-    @season_collection = Game::SEASONS
     @week_collection = Game::WEEKS
     @team_collection = Team.pluck(:name).sort
     @game = Game.new(game_params)
@@ -59,7 +72,6 @@ class GamesController < ApplicationController
     @header_overtime = @game.overtime
     @away_team = @game.away_team.name
     @home_team = @game.home_team.name
-    @season_collection = Game::SEASONS
     @week_collection = Game::WEEKS
     @team_collection = Team.pluck(:name).sort
   end
@@ -74,7 +86,6 @@ class GamesController < ApplicationController
     @header_away_score = @game.away_score
     @header_home_score = @game.home_score
     @header_overtime = @game.overtime
-    @season_collection = Game::SEASONS
     @week_collection = Game::WEEKS
     @team_collection = Team.pluck(:name).sort
     @game.update(game_params)

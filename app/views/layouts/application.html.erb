@@ -32,6 +32,16 @@
     <% end %>
     <%= link_to 'Home', teams_path %><br/>
     <%= link_to 'Stats', stats_path(side: "offense") %>
+    <% if @seasons.nil? || (@seasons.length > 1) %>
+      <% @season_selected = "2001-2016" %>
+    <% else %>
+      <% @season_selected = @seasons[0] %>
+    <% end %>
+    <%= form_for "Season", url: games_path, method: :get do |f| %>
+      <%= f.label :seasons, "Games by Season" %>
+      <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
+      <%= f.submit "Go" %>
+    <% end %>
     <%= yield %>
     <% if user_signed_in? %>
       <p><%= link_to 'Add Game', new_game_path %></p>

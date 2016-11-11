@@ -1,14 +1,14 @@
 class StatsController < ApplicationController
 
   def index
-    @season_collection = ["2001-2016"] + Game::SEASONS
+    @season_stats_collection = ["2001-2016"] + @season_collection
     @sort = params[:sort]
-    if !params[:Season].nil?
-      @season = params[:Season][:season]
+    if !params[:season_stats].nil?
+      @season_stats = params[:season_stats][:season]
     elsif !params[:season].nil?
-      @season = params[:season]
+      @season_stats = params[:season]
     else
-      @season = "2001-2016"
+      @season_stats = "2001-2016"
     end
 
     if params[:side].nil?
@@ -28,9 +28,9 @@ class StatsController < ApplicationController
       if (@sort == "name")
         @teams = Team.all.sort_by {|team| (team.send(@sort))}.reverse
       elsif (@sort == "games")
-        @teams = Team.all.sort_by {|team| (team.send(@sort,@season))}
+        @teams = Team.all.sort_by {|team| (team.send(@sort,@season_stats))}
       else
-        @teams = Team.all.sort_by {|team| (team.send(@sort,@season,@side))}
+        @teams = Team.all.sort_by {|team| (team.send(@sort,@season_stats,@side))}
       end
       if @order == "desc"
         @teams.reverse!

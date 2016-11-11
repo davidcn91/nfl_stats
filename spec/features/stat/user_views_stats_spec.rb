@@ -9,6 +9,7 @@ feature 'user sees stats', %Q{
   # * I should be able to sort this table by any category by clicking on its header.
   # * I should be able to reverse sort any category by clicking on its header a second time.
   # * I should be able to toggle between offensive and defensive stats by clicking a link.
+  # * I should be able to view stats from any specific season.
   # * I should not have to be signed in to view the stats table.
 
   before(:each) do
@@ -20,8 +21,8 @@ feature 'user sees stats', %Q{
     @game_2 = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_2.id, home_team_id: @team_3.id)
     @game_3 = FactoryGirl.create(:game, user_id: @user_1.id, away_team_id: @team_2.id, home_team_id: @team_3.id)
     @stat_1 = FactoryGirl.create(:stat, game_id: @game_1.id)
-    @stat_2 = FactoryGirl.create(:stat, game_id: @game_1.id)
-    @stat_3 = FactoryGirl.create(:stat, game_id: @game_1.id)
+    @stat_2 = FactoryGirl.create(:stat, game_id: @game_2.id)
+    @stat_3 = FactoryGirl.create(:stat, game_id: @game_3.id)
   end
 
   scenario 'user views stats table' do
@@ -40,6 +41,10 @@ feature 'user sees stats', %Q{
     expect(page).to have_content("Fumbles")
     expect(page).to have_content("Turnovers")
     expect(page).to have_content("TO/G")
+    expect(page).to have_content("8.0")
+    expect(page).to have_content("7.0")
+    expect(page).to have_content("10.0")
+    expect(page).to_not have_content("9.0")
   end
 
   scenario "user views defensive stats" do
@@ -55,6 +60,9 @@ feature 'user sees stats', %Q{
     expect(page).to have_content("Fumbles")
     expect(page).to have_content("Turnovers")
     expect(page).to have_content("TO/G")
+    expect(page).to have_content("9.0")
+    expect(page).to have_content("7.0")
+    expect(page).to have_content("10.0")
   end
 
   scenario "user sorts by category" do
@@ -63,5 +71,25 @@ feature 'user sees stats', %Q{
     click_link("3rd Conv")
     click_link("3rd Conv")
     click_link("Fumbles")
+  end
+
+  scenario "user sorts by season" do
+    visit root_path
+    click_link "Stats"
+    select "2015", from: "season_stats_season"
+    click_button "Submit"
+    expect(page).to have_content("8.0")
+    expect(page).to have_content("7.0")
+    expect(page).to have_content("10.0")
+    select "2011", from: "season_stats_season"
+    click_button "Submit"
+    expect(page).to_not have_content("8.0")
+    expect(page).to_not have_content("7.0")
+    expect(page).to_not have_content("10.0")
+    click_link("View Defensive Stats")
+    expect(page).to have_content("2011")
+    click_link("3rd Conv")
+    click_link("Fumbles")
+    expect(page).to have_content("2011")
   end
 end
