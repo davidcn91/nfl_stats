@@ -32,13 +32,13 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <%= link_to 'Home', teams_path %><br/>
-    <%= link_to 'Stats', stats_path(side: "offense") %>
+    <%= link_to 'Stats', stats_path(side: "offense") %><br />
     <% if @seasons.nil? || (@seasons.length > 1) %>
       <% @season_selected = "2001-2016" %>
     <% else %>
       <% @season_selected = @seasons[0] %>
     <% end %>
-    <%= form_for :games_by_season, url: games_path, method: :get do |f| %>
+    <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season" do |f| %>
       <%= f.label :games_by_season, "Games by Season" %>
       <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
       <%= f.submit "Go", id: "games_button" %>
