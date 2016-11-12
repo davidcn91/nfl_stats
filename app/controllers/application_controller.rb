@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   def set_constants
     @season_collection = Game::SEASONS
+    @team_collection = Team.pluck(:name)
   end
 
   protected
