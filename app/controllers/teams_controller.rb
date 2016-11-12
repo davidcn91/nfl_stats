@@ -11,9 +11,7 @@ class TeamsController < ApplicationController
       @team = Team.find(params[:id])
     end
     @team_name = @team.name
-    away_games = Game.where(away_team_id: @team.id)
-    home_games = Game.where(home_team_id: @team.id)
-    @games = ((away_games + home_games).sort_by { |g| [g.season, g.week] }).reverse
+    @games = ((@team.away_games + @team.home_games).sort_by { |g| [g.season, g.week] }).reverse
   end
 
   protected
