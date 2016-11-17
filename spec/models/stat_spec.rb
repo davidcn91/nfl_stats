@@ -32,7 +32,7 @@ RSpec.describe Stat do
   it { should have_valid(:away_passing_yards).when(200,400,450) }
   it { should_not have_valid(:away_passing_yards).when(nil, "") }
 
-  it { should have_valid(:away_time_of_possession).when("10:54", "30:43", "41:43") }
+  it { should have_valid(:away_time_of_possession).when(100, 500, 1000) }
   it { should_not have_valid(:away_time_of_possession).when(nil, "") }
 
   it { should have_valid(:away_fumbles).when(0, 2, 5) }
@@ -77,7 +77,7 @@ RSpec.describe Stat do
   it { should have_valid(:home_passing_yards).when(200,400,450) }
   it { should_not have_valid(:home_passing_yards).when(nil, "") }
 
-  it { should have_valid(:home_time_of_possession).when("10:54", "30:43", "41:43") }
+  it { should have_valid(:home_time_of_possession).when(100, 500, 1000) }
   it { should_not have_valid(:home_time_of_possession).when(nil, "") }
 
   it { should have_valid(:home_fumbles).when(0, 2, 5) }

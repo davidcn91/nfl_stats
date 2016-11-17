@@ -59,6 +59,7 @@ class StatsController < ApplicationController
       render :new
     else
       @stat.game_id = @game.id
+      binding.pry
       if @stat.save
         flash[:notice] = "Game stats added successfully!"
         redirect_to game_path(@game.id)
@@ -79,6 +80,7 @@ class StatsController < ApplicationController
     @stat = Stat.find(params[:id])
     authorize_user(@game)
     @stat.update(stat_params)
+    binding.pry
     @stat.game_id = @game.id
     if @stat.save
       flash[:notice] = "Game stats updated successfully!"
