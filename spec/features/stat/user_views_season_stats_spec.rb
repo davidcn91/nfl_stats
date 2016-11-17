@@ -38,8 +38,7 @@ feature 'user sees stats', %Q{
     expect(page).to have_content("Pts/Gm")
     expect(page).to have_content("3rd Conv")
     expect(page).to have_content("Pen Yards")
-    expect(page).to have_content("Fumbles")
-    expect(page).to have_content("Turnovers")
+    expect(page).to have_content("Fum")
     expect(page).to have_content("TO/G")
     expect(page).to have_content("8.0")
     expect(page).to have_content("7.0")
@@ -57,8 +56,7 @@ feature 'user sees stats', %Q{
     expect(page).to have_content("Pts/Gm")
     expect(page).to have_content("3rd Conv")
     expect(page).to have_content("Pen Yards")
-    expect(page).to have_content("Fumbles")
-    expect(page).to have_content("Turnovers")
+    expect(page).to have_content("Fum")
     expect(page).to have_content("TO/G")
     expect(page).to have_content("9.0")
     expect(page).to have_content("7.0")
@@ -70,7 +68,7 @@ feature 'user sees stats', %Q{
     click_link "Stats"
     click_link("3rd Conv")
     click_link("3rd Conv")
-    click_link("Fumbles")
+    click_link("Fum")
   end
 
   scenario "user sorts by season" do
@@ -89,7 +87,7 @@ feature 'user sees stats', %Q{
     click_link("View Defensive Stats")
     expect(page).to have_content("2011")
     click_link("3rd Conv")
-    click_link("Fumbles")
+    click_link("Fum")
     expect(page).to have_content("2011")
   end
 end

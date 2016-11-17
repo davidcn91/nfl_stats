@@ -31,6 +31,16 @@
       <td><%= team.yards(@season_stats,@side) %></td>
       <td><%= '%.1f' % (team.yards_per_game(@season_stats,@side)) %></td>
       <td><%= '%.1f' % (team.yards_per_play(@season_stats,@side)) %></td>
+      <td><%= team.rushes(@season_stats,@side) %></td>
+      <td><%= team.rushing_yards(@season_stats,@side) %></td>
+      <td><%= '%.1f' % (team.rushing_yards_per_game(@season_stats,@side)) %></td>
+      <td><%= '%.1f' % (team.yards_per_rush(@season_stats,@side)) %></td>
+      <td><%= team.completions(@season_stats,@side) %></td>
+      <td><%= team.passes(@season_stats,@side) %></td>
+      <td><%= '%.0f' % (team.completion_percentage(@season_stats,@side)) %></td>
+      <td><%= '%.1f' % (team.passing_yards(@season_stats,@side)) %></td>
+      <td><%= '%.1f' % (team.passing_yards_per_game(@season_stats,@side)) %></td>
+      <td><%= '%.1f' % (team.yards_per_pass(@season_stats,@side)) %></td>
       <td><%= team.third_down_conversions(@season_stats,@side) %></td>
       <td><%= team.third_down_attempts(@season_stats,@side) %></td>
       <td><%= '%.0f' % (team.third_down_percentage(@season_stats,@side)) %></td>

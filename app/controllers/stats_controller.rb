@@ -38,9 +38,11 @@ class StatsController < ApplicationController
     end
     @categories = [["Team","name"],["G","games"],["Points","points"],["Pts/Gm","points_per_game"],
   ["Plays","plays"],["Plays/Gm","plays_per_game"],["Yards","yards"],["Yds/Gm","yards_per_game"],["Yds/Play","yards_per_play"],
+["Rush","rushes"],["RuYds","rushing_yards"],["RuYds/Gm","rushing_yards_per_game"],["Yds/Rush","yards_per_rush"],
+["Comp","completions"],["Pass","passes"],["Comp Pct","completion_percentage"],["PaYds","passing_yards"],["PaYds/Gm","passing_yards_per_game"],["Yds/Pass","yards_per_pass"],
 ["3rd Conv","third_down_conversions"],["3rd Att","third_down_attempts"],["3rd Pct","third_down_percentage"],
-["Penalties","penalties"],["Pen Yards","penaty_yards"],["Pen Yds/G","penalty_yards_per_game"],["Fumbles","fumbles"],
-["Fum Lost","fumbles_lost"],["INT","interceptions"],["Turnovers","turnovers"],["TO/G","turnovers_per_game"]]
+["Pen","penalties"],["Pen Yards","penaty_yards"],["Pen Yds/G","penalty_yards_per_game"],["Fum","fumbles"],
+["Fum Lost","fumbles_lost"],["INT","interceptions"],["TO","turnovers"],["TO/G","turnovers_per_game"]]
   end
 
   def new

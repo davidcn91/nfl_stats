@@ -92,6 +92,86 @@ class Team < ActiveRecord::Base
     end
   end
 
+  def rushes(season, side)
+    if (side == "offense")
+      calculate_stat(season,"rushes")
+    else
+      calculate_stat_allowed(season,"rushes")
+    end
+  end
+
+  def rushing_yards(season, side)
+    if (side == "offense")
+      calculate_stat(season,"rushing_yards")
+    else
+      calculate_stat_allowed(season,"rushing_yards")
+    end
+  end
+
+  def rushing_yards_per_game(season,side)
+    if games(season) == 0
+      0
+    else
+      (rushing_yards(season,side).to_f/games(season))
+    end
+  end
+
+  def yards_per_rush(season,side)
+    if rushes(season,side) == 0
+      0
+    else
+      (rushing_yards(season,side).to_f/rushes(season,side))
+    end
+  end
+
+  def completions(season, side)
+    if (side == "offense")
+      calculate_stat(season,"completions")
+    else
+      calculate_stat_allowed(season,"completions")
+    end
+  end
+
+  def passes(season, side)
+    if (side == "offense")
+      calculate_stat(season,"passes")
+    else
+      calculate_stat_allowed(season,"passes")
+    end
+  end
+
+  def completion_percentage(season,side)
+    if passes(season,side) == 0
+      0
+    else
+      ((completions(season,side).to_f)/passes(season,side)) * 100
+    end
+  end
+
+  def passing_yards(season, side)
+    if (side == "offense")
+      calculate_stat(season,"passing_yards")
+    else
+      calculate_stat_allowed(season,"passing_yards")
+    end
+  end
+
+  def passing_yards_per_game(season,side)
+    if games(season) == 0
+      0
+    else
+      (passing_yards(season,side).to_f/games(season))
+    end
+  end
+
+  def yards_per_pass(season,side)
+    if passes(season,side) == 0
+      0
+    else
+      (passing_yards(season,side).to_f/passes(season,side))
+    end
+  end
+
   def third_down_conversions(season,side)
     if (side == "offense")
       calculate_stat(season,"third_down_conversions")
