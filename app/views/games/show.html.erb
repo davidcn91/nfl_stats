@@ -6,6 +6,11 @@
   <%= link_to ("#{@game.home_team.location} #{@game.home_team.name}"), team_path(@game.home_team_id) %>
   <%= " #{@game.home_score}" %>
 </h1>
+<% if user_signed_in? && ((current_user.id == @game.user_id) || current_user.role == "admin") %>
+  <br /><%= link_to "Edit Game", edit_game_path(@game.id) %>
+  <%= button_to "Delete Game", @game, method: :delete %>
+<% end %>
+
 <p>
   <span>Betting Line: </span>
   <% if @game.spread < 0 %>

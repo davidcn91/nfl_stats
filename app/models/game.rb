@@ -24,9 +24,14 @@ class Game < ActiveRecord::Base
 
   def away_team_cannot_have_multiple_games_in_same_week
     if !away_team.nil?
-      (away_team.away_games + away_team.home_games).each do |game|
-        if ((game.season == season) && (game.week == week))
-          errors.add(:away_team, "already has game entered this week")
+      if !id.nil?
+        @game = (Game.where(id: id)[0])
+      end
+      if id.nil? || (@game.away_team.id != away_team.id) || (@game.season != season) || (@game.week != week)
+        (away_team.away_games + away_team.home_games).each do |game|
+          if ((game.season == season) && (game.week == week))
+            errors.add(:away_team, "already has game entered this week")
+          end
         end
       end
     end
@@ -34,9 +39,14 @@ class Game < ActiveRecord::Base
 
   def home_team_cannot_have_multiple_games_in_same_week
     if !home_team.nil?
-      (home_team.away_games + home_team.home_games).each do |game|
-        if ((game.season == season) && (game.week == week))
-          errors.add(:home_team, "already has game entered this week")
+      if !id.nil?
+        @game = (Game.where(id: id)[0])
+      end
+      if id.nil? || (@game.home_team.id != home_team.id) || (@game.season != season) || (@game.week != week)
+        (home_team.home_games + home_team.away_games).each do |game|
+          if ((game.season == season) && (game.week == week))
+            errors.add(:home_team, "already has game entered this week")
+          end
         end
       end
     end
