@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20161107222010) do
     t.integer "away_rushing_yards",          null: false
     t.integer "away_passes",                 null: false
     t.integer "away_passing_yards",          null: false
-    t.string  "away_time_of_possession",     null: false
     t.integer "away_fumbles",                null: false
     t.integer "away_fumbles_lost",           null: false
     t.integer "away_interceptions",          null: false
@@ -52,13 +51,14 @@ ActiveRecord::Schema.define(version: 20161107222010) do
     t.integer "home_rushing_yards",          null: false
     t.integer "home_passes",                 null: false
     t.integer "home_passing_yards",          null: false
-    t.string  "home_time_of_possession",     null: false
     t.integer "home_fumbles",                null: false
     t.integer "home_fumbles_lost",           null: false
     t.integer "home_interceptions",          null: false
     t.integer "game_id"
     t.integer "away_completions",            null: false
     t.integer "home_completions",            null: false
+    t.integer "away_time_of_possession",     null: false
+    t.integer "home_time_of_possession",     null: false
   end
 
   create_table "teams", force: :cascade do |t|
