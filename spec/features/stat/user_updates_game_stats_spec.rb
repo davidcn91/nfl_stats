@@ -37,7 +37,6 @@ feature 'user updates game stats', %Q{
     fill_in "stat_away_passes", with: "40"
     fill_in "stat_away_completions", with: "25"
     fill_in "stat_away_passing_yards", with: "400"
-    fill_in "stat_away_time_of_possession", with: "28:50"
     fill_in "stat_away_fumbles", with: "3"
     fill_in "stat_away_fumbles_lost", with: "2"
     fill_in "stat_away_interceptions", with: "3"
@@ -47,7 +46,6 @@ feature 'user updates game stats', %Q{
     expect(page).to have_content("700")
     expect(page).to have_content("4 / 11")
     expect(page).to have_content("2 (10)")
-    expect(page).to have_content("28:50")
   end
 
   scenario 'signed in user is an admin' do
@@ -66,7 +64,6 @@ feature 'user updates game stats', %Q{
     fill_in "stat_away_passes", with: "40"
     fill_in "stat_away_completions", with: "25"
     fill_in "stat_away_passing_yards", with: "400"
-    fill_in "stat_away_time_of_possession", with: "28:50"
     fill_in "stat_away_fumbles", with: "3"
     fill_in "stat_away_fumbles_lost", with: "2"
     fill_in "stat_away_interceptions", with: "3"
@@ -76,7 +73,6 @@ feature 'user updates game stats', %Q{
     expect(page).to have_content("700")
     expect(page).to have_content("4 / 11")
     expect(page).to have_content("2 (10)")
-    expect(page).to have_content("28:50")
   end
 
   scenario 'authenticated user supplies invalid information' do
@@ -104,7 +100,6 @@ feature 'user updates game stats', %Q{
     fill_in "stat_away_passes", with: "30"
     fill_in "stat_away_completions", with: "40"
     fill_in "stat_away_passing_yards", with: "300"
-    fill_in "stat_away_time_of_possession", with: "32:50"
     fill_in "stat_away_fumbles", with: "1"
     fill_in "stat_away_fumbles_lost", with: "3"
     fill_in "stat_away_interceptions", with: "2"
@@ -120,7 +115,6 @@ feature 'user updates game stats', %Q{
     fill_in "stat_home_passes", with: "30"
     fill_in "stat_home_completions", with: "20"
     fill_in "stat_home_passing_yards", with: "300"
-    fill_in "stat_home_time_of_possession", with: "32:50"
     fill_in "stat_home_fumbles", with: "1"
     fill_in "stat_home_fumbles_lost", with: "1"
     fill_in "stat_home_interceptions", with: "2"

@@ -59,7 +59,6 @@ class StatsController < ApplicationController
       render :new
     else
       @stat.game_id = @game.id
-      binding.pry
       if @stat.save
         flash[:notice] = "Game stats added successfully!"
         redirect_to game_path(@game.id)
@@ -80,7 +79,6 @@ class StatsController < ApplicationController
     @stat = Stat.find(params[:id])
     authorize_user(@game)
     @stat.update(stat_params)
-    binding.pry
     @stat.game_id = @game.id
     if @stat.save
       flash[:notice] = "Game stats updated successfully!"
@@ -95,10 +93,10 @@ class StatsController < ApplicationController
   def stat_params
     params.require(:stat).permit(:away_plays, :away_yards, :away_third_down_conversions, :away_third_down_attempts,
     :away_penalties, :away_penalty_yards, :away_rushes, :away_rushing_yards, :away_passes, :away_completions,
-    :away_passing_yards, :away_time_of_possession, :away_fumbles, :away_fumbles_lost, :away_interceptions,
+    :away_passing_yards, :away_fumbles, :away_fumbles_lost, :away_interceptions,
     :home_plays, :home_yards, :home_third_down_conversions, :home_third_down_attempts, :home_completions,
     :home_penalties, :home_penalty_yards, :home_rushes, :home_rushing_yards, :home_passes,
-    :home_passing_yards, :home_time_of_possession, :home_fumbles, :home_fumbles_lost, :home_interceptions)
+    :home_passing_yards, :home_fumbles, :home_fumbles_lost, :home_interceptions)
   end
 
   def authorize_user(game)

@@ -54,8 +54,6 @@ feature 'user sees game stats', %Q{
     expect(page).to have_content("2")
     expect(page).to have_content("#{@game_1.stat.away_penalties} (#{@game_1.stat.away_penalty_yards})")
     expect(page).to have_content("5 (40)")
-    expect(page).to have_content(@game_1.stat.away_time_of_possession)
-    expect(page).to have_content("30:00")
   end
 
   scenario 'authorized user view game that does not have stats' do

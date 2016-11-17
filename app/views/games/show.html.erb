@@ -121,13 +121,8 @@
       <td><%= "#{@game.stat.away_penalties} (#{@game.stat.away_penalty_yards})" %></td>
       <td><%= "#{@game.stat.home_penalties} (#{@game.stat.home_penalty_yards})" %></td>
     </tr>
-    <tr>
-      <td>Time of Possession</td>
-      <td><%= @game.stat.away_time_of_possession %></td>
-      <td><%= @game.stat.home_time_of_possession %></td>
-    </tr>
-
   </table>
+
   <% if user_signed_in? && ((current_user.id == @game.user_id) || current_user.admin?) %>
     <%= link_to "Edit Stats", edit_game_stat_path(@game.id, @game.stat.id) %>
   <% end %>

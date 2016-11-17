@@ -12,7 +12,6 @@ FactoryGirl.define do
     away_fumbles 2
     away_fumbles_lost 1
     away_interceptions 1
-    away_time_of_possession "30:00"
     away_penalties 5
     away_penalty_yards 40
     home_plays 50
@@ -27,7 +26,6 @@ FactoryGirl.define do
     home_fumbles 2
     home_fumbles_lost 1
     home_interceptions 1
-    home_time_of_possession "30:00"
     home_penalties 5
     home_penalty_yards 40
   end

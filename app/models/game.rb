@@ -57,4 +57,5 @@ class Game < ActiveRecord::Base
       errors.add(:overtime, "game margin must be 0, 2, 3, or 6")
     end
   end
+
 end
