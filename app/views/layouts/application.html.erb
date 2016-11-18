@@ -31,19 +31,22 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= link_to 'Home', teams_path %><br/>
-    <%= link_to 'Stats', stats_path(side: "offense") %><br />
+    <%= link_to 'Home', teams_path, class: "header" %>
+    <%= link_to 'Stats', stats_path(side: "offense"), class: "header" %>
+    <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
     <% if @seasons.nil? || (@seasons.length > 1) %>
       <% @season_selected = "2001-2016" %>
     <% else %>
       <% @season_selected = @seasons[0] %>
     <% end %>
-    <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season" do |f| %>
+    <br />
+    <br />
+    <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
       <%= f.label :games_by_season, "Games by Season" %>
       <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
       <%= f.submit "Go", id: "games_button" %>
     <% end %>
-    <%= form_for :teams, url: team_path("dropdown_selection"), method: :get do |f| %>
+    <%= form_for :teams, url: team_path("teams_dropdown"), method: :get, class: "header" do |f| %>
       <%= f.label :teams, "Teams" %>
       <%= f.select :name, @team_collection, selected: @team_name %>
       <%= f.submit "Go", id: "teams_button" %>

@@ -3,7 +3,7 @@
 <% Team::DIVISIONS.each do |division| %>
   <h3><%= division %></h3>
   <ul>
-    <% @teams.each do |team| %>
+    <% @teams.where(division: division).each do |team| %>
       <% if team.division == division %>
         <li><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></li>
       <% end %>

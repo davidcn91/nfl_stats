@@ -280,4 +280,42 @@ class Team < ActiveRecord::Base
     total
   end
 
+  def record(season = "2001-2016")
+    record = [0,0,0]
+    if season == "2001-2016"
+      team_away_games = away_games
+      team_home_games = home_games
+    else
+      team_away_games = away_games.where(season: season)
+      team_home_games = home_games.where(season: season)
+    end
+    team_away_games.each do |game|
+      if game.away_score > game.home_score
+        record[0] += 1
+      elsif game.home_score > game.away_score
+        record[1] += 1
+      elsif game.home_score == game.away_score
+        record[2] += 1
+      end
+    end
+    team_home_games.each do |game|
+      if game.home_score > game.away_score
+        record[0] += 1
+      elsif game.away_score > game.home_score
+        record[1] += 1
+      elsif game.home_score == game.away_score
+        record[2] += 1
+      end
+    end
+    record
+  end
+
+  def win_percentage(season)
+    if record(season) == [0,0,0]
+      0
+    else
+      (record(season)[0] + (record(season)[2].to_f/2))/(record(season)[0] + record(season)[1] + record(season)[2])
+    end
+  end
+
 end

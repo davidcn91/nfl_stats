@@ -1,0 +1,44 @@
+<h1>Standings</h1>
+
+<%= form_for :standings_by_season, url: teams_path, method: :get, id: "standings_by_season" do |f| %>
+  <%= f.label :standings_by_season, "Standings by Season" %>
+  <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season %>
+  <%= f.submit "Go", id: "standings_button" %>
+<% end %>
+
+<h3><%= @season %></h3>
+
+<% ["NFC","AFC"].each do |conference| %>
+  <table class="standings">
+    <tr>
+      <th>Team</th>
+      <th>W</th>
+      <th>L</th>
+      <th>T</th>
+      <th>Win %</th>
+    </tr>
+    <% Team::DIVISIONS.each do |division| %>
+      <% if division.include?(conference) %>
+        <tr>
+          <th><%= division %></th>
+        </tr>
+        <% division_teams = @teams.where(division: division).sort_by {|t| t.win_percentage(@season)}.reverse %>
+        <% division_teams.each do |team| %>
+          <tr>
+            <td><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></td>
+            <td><%= team.record(@season)[0] %></td>
+            <td><%= team.record(@season)[1] %></td>
+            <td><%= team.record(@season)[2] %></td>
+            <td class="win_pct">
+              <% win_pct = ('%.3f' % team.win_percentage(@season)).to_s %>
+              <% if win_pct[0] == "0" %>
+                <% win_pct[0] = " " %>
+              <% end %>
+              <%= win_pct %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>
