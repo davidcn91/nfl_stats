@@ -8,7 +8,14 @@
           <h3 align="center"><%= division %></h3>
           <% @teams.where(division: division).each do |team| %>
             <% if team.division == division %>
-              <span align="center"><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></span><br />
+              <% if user_signed_in? && (current_user.team_id == team.id) %>
+                <% team_class = "favorite" %>
+              <% else %>
+                <% team_class = "team" %>
+              <% end %>
+              <span align="center" class=<%= team_class %>>
+                <%= link_to "#{team.location} #{team.name}", team_path(team.id) %>
+              </span><br />
             <% end %>
           <% end %>
         <% end %>

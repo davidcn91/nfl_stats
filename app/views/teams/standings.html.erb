@@ -27,7 +27,12 @@
           </tr>
           <% division_teams = @teams.where(division: division).sort_by {|t| t.win_percentage(@season)}.reverse %>
           <% division_teams.each do |team| %>
-            <tr class="data">
+            <% if user_signed_in? && (current_user.team_id == team.id) %>
+              <% team_class = "favorite" %>
+            <% else %>
+              <% team_class = "team" %>
+            <% end %>
+            <tr class=<%= team_class %>>
               <td class="name"><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></td>
               <td><%= team.record(@season)[0] %></td>
               <td><%= team.record(@season)[1] %></td>

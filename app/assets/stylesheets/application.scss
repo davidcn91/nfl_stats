@@ -23,6 +23,10 @@ nav:first-child {
   padding-right: 100px;
 }
 
+.favorite {
+  background-color: yellow;
+}
+
 table {
   font-size: 13.5px;
 }
@@ -37,7 +41,7 @@ table {
   padding: 20px;
 }
 
-.data {
+.team, .favorite {
   text-align: right;
 }
 
