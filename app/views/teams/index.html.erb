@@ -1,12 +1,18 @@
-<h1>Teams</h1>
+<h1 align="center">Teams</h1>
 
-<% Team::DIVISIONS.each do |division| %>
-  <h3><%= division %></h3>
-  <ul>
-    <% @teams.where(division: division).each do |team| %>
-      <% if team.division == division %>
-        <li><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></li>
+<div align="center">
+  <% ["NFC","AFC"].each do |conference| %>
+    <div class="conference">
+      <% Team::DIVISIONS.each do |division| %>
+        <% if division.include?(conference) %>
+          <h3 align="center"><%= division %></h3>
+          <% @teams.where(division: division).each do |team| %>
+            <% if team.division == division %>
+              <span align="center"><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></span><br />
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
-<% end %>
+    </div>
+  <% end %>
+</div>

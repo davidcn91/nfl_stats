@@ -12,6 +12,10 @@ nav:first-child {
   right: 20px;
 }
 
+.conference {
+  display: table-cell;
+}
+
 table {
   font-size: 13.5px;
 }
@@ -26,6 +30,14 @@ table {
   padding: 20px;
 }
 
-.win_pct {
+.data {
   text-align: right;
+}
+
+.name {
+  text-align: left;
+}
+
+.standings td {
+  padding: 5px;
 }

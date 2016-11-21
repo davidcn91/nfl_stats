@@ -280,7 +280,7 @@ class Team < ActiveRecord::Base
     total
   end
 
-  def record(season = "2001-2016")
+  def record(season = "2001-2016", div = nil, conf = nil)
     record = [0,0,0]
     if season == "2001-2016"
       team_away_games = away_games
@@ -288,6 +288,13 @@ class Team < ActiveRecord::Base
     else
       team_away_games = away_games.where(season: season)
       team_home_games = home_games.where(season: season)
+    end
+    if div
+      team_away_games = division_away_games(team_away_games)
+      team_home_games = division_home_games(team_home_games)
+    elsif conf
+      team_away_games = conference_away_games(team_away_games)
+      team_home_games = conference_home_games(team_home_games)
     end
     team_away_games.each do |game|
       if game.away_score > game.home_score
@@ -310,6 +317,46 @@ class Team < ActiveRecord::Base
     record
   end
 
+  def division_away_games(team_away_games)
+    div_away_games = []
+    team_away_games.each do |game|
+      if game.away_team.division == game.home_team.division
+        div_away_games << game
+      end
+    end
+    div_away_games
+  end
+
+  def division_home_games(team_home_games)
+    div_home_games = []
+    team_home_games.each do |game|
+      if game.home_team.division == game.away_team.division
+        div_home_games << game
+      end
+    end
+    div_home_games
+  end
+
+  def conference_away_games(team_away_games)
+    conf_away_games = []
+    team_away_games.each do |game|
+      if game.home_team.division.include?(game.away_team.division[0,3])
+        conf_away_games << game
+      end
+    end
+    conf_away_games
+  end
+
+  def conference_home_games(team_home_games)
+    conf_home_games = []
+    team_home_games.each do |game|
+      if game.away_team.division.include?(game.home_team.division[0,3])
+        conf_home_games << game
+      end
+    end
+    conf_home_games
+  end
+
   def win_percentage(season)
     if record(season) == [0,0,0]
       0
@@ -317,5 +364,33 @@ class Team < ActiveRecord::Base
       (record(season)[0] + (record(season)[2].to_f/2))/(record(season)[0] + record(season)[1] + record(season)[2])
     end
   end
+
+  def standings_points(season, side)
+    if season == "2001-2016"
+      team_away_games = away_games
+      team_home_games = home_games
+    else
+      team_away_games = away_games.where(season: season)
+      team_home_games = home_games.where(season: season)
+    end
+    points = 0
+    (team_away_games + team_home_games).each do |game|
+      if name == game.away_team.name
+        if (side == "offense")
+          points += game.away_score
+        else
+          points += game.home_score
+        end
+      else
+        if (side == "offense")
+          points += game.home_score
+        else
+          points += game.away_score
+        end
+      end
+    end
+    points
+  end
+
 
 end
