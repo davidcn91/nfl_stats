@@ -41,9 +41,6 @@ table {
   padding: 20px;
 }
 
-.team, .favorite {
-  text-align: right;
-}
 
 .name {
   text-align: left;
@@ -51,4 +48,21 @@ table {
 
 .standings td {
   padding: 5px;
+}
+
+#stats {
+  border-collapse: collapse;
+}
+
+#stats tr {
+  border-bottom: ridge;
+  border-width: 2px;
+}
+
+#stats td {
+  text-align: center;
+}
+
+#stats .favorite, #stats .team {
+  text-align: left;
 }

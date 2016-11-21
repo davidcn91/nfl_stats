@@ -25,7 +25,7 @@ feature 'user sees game stats', %Q{
   scenario 'user views game that has stats' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    click_link "Game Stats"
+    click_link "Game Details"
 
     expect(page).to have_content("#{@game_1.season} Week #{@game_1.week}: #{@game_1.away_team.location} #{@game_1.away_team.name} #{@game_1.away_score} at #{@game_1.home_team.location} #{@game_1.home_team.name} #{@game_1.home_score}")
     expect(page).to have_content(@game_1.stat.away_plays)

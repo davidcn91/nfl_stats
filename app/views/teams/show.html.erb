@@ -22,12 +22,11 @@
             <% if game.overtime? %>
               <span> (OT)</span>
             <% end %>
-            <% if !game.stat.nil? %>
-              <%= link_to "Game Stats", game_path(game.id) %>
-            <% elsif user_signed_in? && ((current_user.id == game.user_id) || current_user.admin?) %>
-              <%= link_to "Add Stats", new_game_stat_path(game.id) %>
-            <% end %>
+            <%= link_to "Game Details", game_path(game.id) %>
             <% if user_signed_in? && ((current_user.id == game.user_id) || current_user.role == "admin") %>
+              <% if game.stat.nil? %>
+                <br /><%= link_to "Add Stats", new_game_stat_path(game.id) %>
+              <% end %>
               <br /><%= link_to "Edit Game", edit_game_path(game.id) %>
               <%= button_to "Delete Game", game, method: :delete %>
             <% end %>

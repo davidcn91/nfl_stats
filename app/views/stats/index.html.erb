@@ -14,7 +14,7 @@
   <% new_side = "offense" %>
 <% end %>
   <%= link_to "View #{new_side[0,new_side.length-1].capitalize}ive Stats", side: new_side, season: @season_stats %>
-<table>
+<table id="stats">
   <tr>
     <% @categories.each do |category| %>
       <th><%= link_to category[0], sort: category[1], side: @side, current_sort: @sort, order: @order, season: @season_stats %></th>
@@ -22,7 +22,7 @@
   </tr>
   <% @teams.each do |team| %>
     <tr>
-      <td><%= link_to team.name, team_path(team.id) %></td>
+      <td class=<%= team_class(team) %>><%= link_to team.name, team_path(team.id) %></td>
       <td><%= team.games(@season_stats) %></td>
       <td><%= team.points(@season_stats,@side) %></td>
       <td><%= '%.1f' % (team.points_per_game(@season_stats,@side)) %></td>

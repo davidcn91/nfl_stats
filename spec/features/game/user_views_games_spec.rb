@@ -29,7 +29,7 @@ feature 'user sees games', %Q{
     click_button 'games_button'
     expect(page).to have_content("#{@game_1.away_team.abbreviation} #{@game_1.away_score} at #{@game_1.home_team.abbreviation} #{@game_1.home_score}")
     expect(page).to have_content("#{@game_2.away_team.abbreviation} #{@game_2.away_score} at #{@game_2.home_team.abbreviation} #{@game_2.home_score}")
-    expect(page).to have_link("Game Stats")
+    expect(page).to have_link("Game Details")
   end
 
   scenario 'user views games from specific season' do
@@ -53,7 +53,7 @@ feature 'user sees games', %Q{
   scenario 'user clicks season link' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    click_link "Game Stats"
+    click_link "Game Details"
     click_link "#{@game_1.season}"
     expect(page).to have_content("#{@game_1.away_team.abbreviation} #{@game_1.away_score} at #{@game_1.home_team.abbreviation} #{@game_1.home_score}")
 
