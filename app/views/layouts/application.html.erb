@@ -34,6 +34,9 @@
     <%= link_to 'Home', teams_path, class: "header" %>
     <%= link_to 'Stats', stats_path(side: "offense"), class: "header" %>
     <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
+    <% if user_signed_in? %>
+      <%= link_to 'Add Game', new_game_path, class: "header" %>
+    <% end %>
     <% if @seasons.nil? || (@seasons.length > 1) %>
       <% @season_selected = "2001-2016" %>
     <% else %>
@@ -52,8 +55,5 @@
       <%= f.submit "Go", id: "teams_button" %>
     <% end %>
     <%= yield %>
-    <% if user_signed_in? %>
-      <p><%= link_to 'Add Game', new_game_path %></p>
-    <% end %>
   </body>
 </html>
