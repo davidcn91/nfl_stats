@@ -1,3 +1,8 @@
+#title {
+  position: absolute;
+  right: 20px;
+}
+
 nav li {
   list-style-type: none;
   text-align: right;
@@ -14,6 +19,8 @@ nav:first-child {
 
 .conference {
   display: table-cell;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 table {

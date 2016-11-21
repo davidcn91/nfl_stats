@@ -1,6 +1,6 @@
 feature 'user views team page', %Q{
   As a user
-  I want to view team's page
+  I want to view a team's page
   So that I can view its game history
 } do
 
