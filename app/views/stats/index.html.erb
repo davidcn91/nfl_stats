@@ -14,7 +14,7 @@
   <% new_side = "offense" %>
 <% end %>
   <%= link_to "View #{new_side[0,new_side.length-1].capitalize}ive Stats", side: new_side, season: @season_stats %>
-<table id="stats">
+<table id="stats", class=<%= @sort %>>
   <tr>
     <% @categories.each do |category| %>
       <th><%= link_to category[0], sort: category[1], side: @side, current_sort: @sort, order: @order, season: @season_stats %></th>
@@ -38,7 +38,7 @@
       <td><%= team.completions(@season_stats,@side) %></td>
       <td><%= team.passes(@season_stats,@side) %></td>
       <td><%= '%.0f' % (team.completion_percentage(@season_stats,@side)) %></td>
-      <td><%= '%.1f' % (team.passing_yards(@season_stats,@side)) %></td>
+      <td><%= team.passing_yards(@season_stats,@side) %></td>
       <td><%= '%.1f' % (team.passing_yards_per_game(@season_stats,@side)) %></td>
       <td><%= '%.1f' % (team.yards_per_pass(@season_stats,@side)) %></td>
       <td><%= team.third_down_conversions(@season_stats,@side) %></td>
@@ -54,4 +54,24 @@
       <td><%= team.turnovers_per_game(@season_stats,@side) %></td>
     </tr>
   <% end %>
+  <script>
+    var sort = $("table").attr("class");
+    var categories = ["name","games","points","points_per_game","plays","plays_per_game",
+    "yards","yards_per_game","yards_per_play","rushes","rushing_yards","rushing_yards_per_game",
+    "yards_per_rush","completions","passes","completion_percentage","passing_yards","passing_yards_per_game",
+    "yards_per_pass","third_down_conversions","third_down_attempts","third_down_percentage",
+    "penalties","penaty_yards","penalty_yards_per_game","fumbles","fumbles_lost","interceptions","turnovers",
+    "turnovers_per_game"];
+    var column_id = 0
+    $("td").each(function() {
+      $(this).addClass(categories[column_id]);
+      column_id += 1;
+      if (column_id == categories.length) {
+        column_id = 0;
+      };
+      if (sort == $(this).attr("class")) {
+        $(this).addClass("sorted");
+      };
+    });
+  </script>
 </table>

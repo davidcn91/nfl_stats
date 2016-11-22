@@ -9,4 +9,13 @@ module ClassHelper
     team_class
   end
 
+  def stat_column_class(category, sort)
+    if category == sort
+      stat_column_class = "sorted"
+    else
+      stat_column_class = "not_sorted"
+    end
+    stat_column_class
+  end
+
 end
