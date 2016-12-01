@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {registrations: 'users'}
+  devise_for :users, controllers: {registrations: 'members'}
 
+  resources :users
   resources :teams
   resources :games do
     resources :stats

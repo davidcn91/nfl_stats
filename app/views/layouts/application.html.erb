@@ -36,12 +36,17 @@
     <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
     <% if user_signed_in? %>
       <%= link_to 'Add Game', new_game_path, class: "header" %>
+      <% if current_user.admin? %>
+        <%= link_to 'Users', users_path, class: "header" %>
+      <% end %>
     <% end %>
+
     <% if @seasons.nil? || (@seasons.length > 1) %>
       <% @season_selected = "2001-2016" %>
     <% else %>
       <% @season_selected = @seasons[0] %>
     <% end %>
+
     <br />
     <br />
     <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
