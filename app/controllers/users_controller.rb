@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
+  before_action :authorize_user
+
   def index
-    authorize_user
     @users = User.order(:first_name)
   end
 
   def destroy
-    authorize_user
     @user = User.find(params[:id])
     @user.destroy
     redirect_to users_path
