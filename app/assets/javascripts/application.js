@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require_tree .
 
 
@@ -33,3 +34,5 @@ $("td").each(function() {
     $(this).addClass("sorted");
   };
 });
+
+$(function(){ $(document).foundation(); });
