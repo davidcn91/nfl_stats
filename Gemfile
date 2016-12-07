@@ -9,6 +9,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'devise'
+gem 'foundation-rails'
 
 group :development, :test do
   gem 'capybara'
