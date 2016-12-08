@@ -20,8 +20,6 @@ li {
   list-style-type: none;
 }
 
-
-
 .conference {
   display: table-cell;
   padding-left: 100px;
@@ -116,4 +114,33 @@ a .side {
 
 .center {
   text-align: center;
+}
+
+.left.stats {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.right {
+  text-align: right;
+}
+
+.add_stats h1 {
+  text-align: center;
+}
+
+.add_stats h3 {
+  text-align: center;
+}
+
+.space {
+  padding-right: 100px;
+  padding-left: 100px;
+}
+
+.submit input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 }

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="small-2 large-2 columns">
+  <div class="small-2 large-2 columns left stats">
     <strong><%= @side.capitalize %></strong><br/>
     <% if @side == "offense" %>
       <% new_side = "defense" %>
@@ -8,11 +8,11 @@
     <% end %>
     <%= link_to "View #{new_side[0,new_side.length-1].capitalize}ive Stats", side: new_side, season: @season_stats %>
   </div>
-  <div class="small-2 large-8 columns center">
-    <h1><%= "Stats (#{@season_stats})" %></h1>
+  <div class="small-4 large-8 columns center stats">
+    <h1><%= "Stats" %></h1>
     <h5><i>(Games where no stats have been added are not included)</i></h5>
   </div>
-  <div class="small-2 large-2 columns">
+  <div class="small-2 large-2 columns right stats">
     <%= form_for "season_stats", url: stats_path, method: :get do |f| %>
       <%= f.label :seasons, "Stats by Season" %>
       <%= f.select :season, @season_stats_collection, selected: @season_stats %>
@@ -21,6 +21,7 @@
   </div>
 </div>
 
+<h3 align="center"><%= @season_stats %></h3>
 
 <table id="stats", class=<%= @sort %>>
   <tr>

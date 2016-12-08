@@ -1,151 +1,159 @@
-<%= form_for [@game, @stat] do |s| %>
+<div class="row">
+  <%= form_for [@game, @stat] do |s| %>
+    <div class="small-12 large-6 columns space left">
+      <h3>Away Team Stats</h3>
 
-  <h3>Away Team Stats</h3>
+      <div class="row">
+        <%= s.label :away_plays, "Plays from Scrimmage" %>
+        <%= s.text_field :away_plays %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_plays, "Plays from Scrimmage" %>
-    <%= s.text_field :away_plays %>
-  </div>
+      <div class="row">
+        <%= s.label :away_yards, "Total Yards" %>
+        <%= s.text_field :away_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_yards, "Total Yards" %>
-    <%= s.text_field :away_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :away_third_down_conversions, "Third Down Conversions" %>
+        <%= s.text_field :away_third_down_conversions %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_third_down_conversions, "Third Down Conversions" %>
-    <%= s.text_field :away_third_down_conversions %>
-  </div>
+      <div class="row">
+        <%= s.label :away_third_down_attempts, "Third Down Attempts" %>
+        <%= s.text_field :away_third_down_attempts %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_third_down_attempts, "Third Down Attempts" %>
-    <%= s.text_field :away_third_down_attempts %>
-  </div>
+      <div class="row">
+        <%= s.label :away_penalties, "Penalties" %>
+        <%= s.text_field :away_penalties %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_penalties, "Penalties" %>
-    <%= s.text_field :away_penalties %>
-  </div>
+      <div class="row">
+        <%= s.label :away_penalty_yards, "Penalty Yards" %>
+        <%= s.text_field :away_penalty_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_penalty_yards, "Penalty Yards" %>
-    <%= s.text_field :away_penalty_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :away_rushes, "Rush Attempts" %>
+        <%= s.text_field :away_rushes %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_rushes, "Rush Attempts" %>
-    <%= s.text_field :away_rushes %>
-  </div>
+      <div class="row">
+        <%= s.label :away_rushing_yards, "Rushing Yards" %>
+        <%= s.text_field :away_rushing_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_rushing_yards, "Rushing Yards" %>
-    <%= s.text_field :away_rushing_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :away_passes, "Pass Attempts" %>
+        <%= s.text_field :away_passes %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_passes, "Pass Attempts" %>
-    <%= s.text_field :away_passes %>
-  </div>
+      <div class="row">
+        <%= s.label :away_completions, "Completions" %>
+        <%= s.text_field :away_completions %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_completions, "Completions" %>
-    <%= s.text_field :away_completions %>
-  </div>
+      <div class="row">
+        <%= s.label :away_passing_yards, "Passing Yards" %>
+        <%= s.text_field :away_passing_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_passing_yards, "Passing Yards" %>
-    <%= s.text_field :away_passing_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :away_fumbles, "Fumbles" %>
+        <%= s.text_field :away_fumbles %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_fumbles, "Fumbles" %>
-    <%= s.text_field :away_fumbles %>
-  </div>
+      <div class="row">
+        <%= s.label :away_fumbles_lost, "Fumbles Lost" %>
+        <%= s.text_field :away_fumbles_lost %>
+      </div>
 
-  <div class="row">
-    <%= s.label :away_fumbles_lost, "Fumbles Lost" %>
-    <%= s.text_field :away_fumbles_lost %>
-  </div>
+      <div class="row">
+        <%= s.label :away_interceptions, "Interceptions Thrown" %>
+        <%= s.text_field :away_interceptions %>
+      </div>
+    </div>
 
-  <div class="row">
-    <%= s.label :away_interceptions, "Interceptions Thrown" %>
-    <%= s.text_field :away_interceptions %>
-  </div>
 
-  <h3>Home Team Stats</h3>
+    <div class="small-12 large-6 columns space">
+      <h3>Home Team Stats</h3>
 
-  <div class="row">
-    <%= s.label :home_plays, "Plays from Scrimmage" %>
-    <%= s.text_field :home_plays %>
-  </div>
+      <div class="row">
+        <%= s.label :home_plays, "Plays from Scrimmage" %>
+        <%= s.text_field :home_plays %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_yards, "Total Yards" %>
-    <%= s.text_field :home_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :home_yards, "Total Yards" %>
+        <%= s.text_field :home_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_third_down_conversions, "Third Down Conversions" %>
-    <%= s.text_field :home_third_down_conversions %>
-  </div>
+      <div class="row">
+        <%= s.label :home_third_down_conversions, "Third Down Conversions" %>
+        <%= s.text_field :home_third_down_conversions %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_third_down_attempts, "Third Down Attempts" %>
-    <%= s.text_field :home_third_down_attempts %>
-  </div>
+      <div class="row">
+        <%= s.label :home_third_down_attempts, "Third Down Attempts" %>
+        <%= s.text_field :home_third_down_attempts %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_penalties, "Penalties" %>
-    <%= s.text_field :home_penalties %>
-  </div>
+      <div class="row">
+        <%= s.label :home_penalties, "Penalties" %>
+        <%= s.text_field :home_penalties %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_penalty_yards, "Penalty Yards" %>
-    <%= s.text_field :home_penalty_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :home_penalty_yards, "Penalty Yards" %>
+        <%= s.text_field :home_penalty_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_rushes, "Rush Attempts" %>
-    <%= s.text_field :home_rushes %>
-  </div>
+      <div class="row">
+        <%= s.label :home_rushes, "Rush Attempts" %>
+        <%= s.text_field :home_rushes %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_rushing_yards, "Rushing Yards" %>
-    <%= s.text_field :home_rushing_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :home_rushing_yards, "Rushing Yards" %>
+        <%= s.text_field :home_rushing_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_passes, "Pass Attempts" %>
-    <%= s.text_field :home_passes %>
-  </div>
+      <div class="row">
+        <%= s.label :home_passes, "Pass Attempts" %>
+        <%= s.text_field :home_passes %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_completions, "Completions" %>
-    <%= s.text_field :home_completions %>
-  </div>
+      <div class="row">
+        <%= s.label :home_completions, "Completions" %>
+        <%= s.text_field :home_completions %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_passing_yards, "Passing Yards" %>
-    <%= s.text_field :home_passing_yards %>
-  </div>
+      <div class="row">
+        <%= s.label :home_passing_yards, "Passing Yards" %>
+        <%= s.text_field :home_passing_yards %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_fumbles, "Fumbles" %>
-    <%= s.text_field :home_fumbles %>
-  </div>
+      <div class="row">
+        <%= s.label :home_fumbles, "Fumbles" %>
+        <%= s.text_field :home_fumbles %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_fumbles_lost, "Fumbles Lost" %>
-    <%= s.text_field :home_fumbles_lost %>
-  </div>
+      <div class="row">
+        <%= s.label :home_fumbles_lost, "Fumbles Lost" %>
+        <%= s.text_field :home_fumbles_lost %>
+      </div>
 
-  <div class="row">
-    <%= s.label :home_interceptions, "Interceptions Thrown" %>
-    <%= s.text_field :home_interceptions %>
-  </div>
+      <div class="row">
+        <%= s.label :home_interceptions, "Interceptions Thrown" %>
+        <%= s.text_field :home_interceptions %>
+      </div>
 
-  <div class="action">
-    <%= s.submit "Submit Game Stats" %>
-  </div>
 
-<% end %>
+    </div>
+    <div class="row">
+      <div class="action small-6 large-12 columns submit">
+        <%= s.submit "Submit Game Stats" %>
+      </div>
+    </div>
+  <% end %>
+</div>
