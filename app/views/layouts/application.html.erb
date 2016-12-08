@@ -34,34 +34,41 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <%= link_to 'Home', teams_path, class: "header" %>
-    <%= link_to 'Stats', stats_path(side: "offense"), class: "header" %>
-    <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
-    <% if user_signed_in? %>
-      <%= link_to 'Add Game', new_game_path, class: "header" %>
-      <% if current_user.admin? %>
-        <%= link_to 'Users', users_path, class: "header" %>
-      <% end %>
-    <% end %>
 
-    <% if @seasons.nil? || (@seasons.length > 1) %>
-      <% @season_selected = "2001-2016" %>
-    <% else %>
-      <% @season_selected = @seasons[0] %>
-    <% end %>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <%= link_to 'Home', teams_path, class: "header" %>
+        <%= link_to 'Stats', stats_path(side: "offense"), class: "header" %>
+        <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
+        <% if user_signed_in? %>
+          <%= link_to 'Add Game', new_game_path, class: "header" %>
+          <% if current_user.admin? %>
+            <%= link_to 'Users', users_path, class: "header" %>
+          <% end %>
+        <% end %>
 
-    <br />
-    <br />
-    <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
-      <%= f.label :games_by_season, "Games by Season" %>
-      <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
-      <%= f.submit "Go", id: "games_button" %>
-    <% end %>
-    <%= form_for :teams, url: team_path("teams_dropdown"), method: :get, class: "header" do |f| %>
-      <%= f.label :teams, "Teams" %>
-      <%= f.select :name, @team_collection, selected: @team_name %>
-      <%= f.submit "Go", id: "teams_button" %>
-    <% end %>
+        <% if @seasons.nil? || (@seasons.length > 1) %>
+          <% @season_selected = "2001-2016" %>
+        <% else %>
+          <% @season_selected = @seasons[0] %>
+        <% end %>
+      </div>
+
+      <div class="top-bar-center">
+        <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
+          <%= f.label :games_by_season, "Games by Season" %>
+          <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
+          <%= f.submit "Go", id: "games_button", type: "submit" %>
+        <% end %>
+
+        <%= form_for :teams, url: team_path("teams_dropdown"), method: :get, class: "header" do |f| %>
+          <%= f.label :teams, "Teams" %>
+          <%= f.select :name, @team_collection, selected: @team_name %>
+          <%= f.submit "Go", id: "teams_button" %>
+        <% end %>
+      </div>
+    </div>
+
     <%= yield %>
   </body>
 </html>
