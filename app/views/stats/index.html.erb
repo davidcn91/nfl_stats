@@ -1,19 +1,27 @@
-<h1><%= "Stats (#{@season_stats})" %></h1>
-<h5><i>(Games where no stats have been added are not included)</i></h5>
+<div class="row">
+  <div class="small-2 large-2 columns">
+    <strong><%= @side.capitalize %></strong><br/>
+    <% if @side == "offense" %>
+      <% new_side = "defense" %>
+    <% else %>
+      <% new_side = "offense" %>
+    <% end %>
+    <%= link_to "View #{new_side[0,new_side.length-1].capitalize}ive Stats", side: new_side, season: @season_stats %>
+  </div>
+  <div class="small-2 large-8 columns center">
+    <h1><%= "Stats (#{@season_stats})" %></h1>
+    <h5><i>(Games where no stats have been added are not included)</i></h5>
+  </div>
+  <div class="small-2 large-2 columns">
+    <%= form_for "season_stats", url: stats_path, method: :get do |f| %>
+      <%= f.label :seasons, "Stats by Season" %>
+      <%= f.select :season, @season_stats_collection, selected: @season_stats %>
+      <%= f.submit "Submit" %>
+    <% end %>
+  </div>
+</div>
 
-<%= form_for "season_stats", url: stats_path, method: :get do |f| %>
-  <%= f.label :seasons, "Stats by Season" %>
-  <%= f.select :season, @season_stats_collection, selected: @season_stats %>
-  <%= f.submit "Submit" %>
-<% end %>
 
-<strong><%= @side.capitalize %></strong><br/>
-<% if @side == "offense" %>
-  <% new_side = "defense" %>
-<% else %>
-  <% new_side = "offense" %>
-<% end %>
-  <%= link_to "View #{new_side[0,new_side.length-1].capitalize}ive Stats", side: new_side, season: @season_stats %>
 <table id="stats", class=<%= @sort %>>
   <tr>
     <% @categories.each do |category| %>

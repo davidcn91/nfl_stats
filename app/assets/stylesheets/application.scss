@@ -3,6 +3,12 @@
 
 body {
   padding-bottom: 50px;
+  margin-bottom: 50px;
+  background-color: #CCFF99;
+}
+
+.top-bar {
+  background-color: white;
 }
 
 #title {
@@ -10,19 +16,11 @@ body {
   right: 20px;
 }
 
-nav li {
-  list-style-type: none;
-  text-align: right;
-}
-
 li {
   list-style-type: none;
 }
 
-nav:first-child {
-  position: absolute;
-  right: 20px;
-}
+
 
 .conference {
   display: table-cell;
@@ -43,8 +41,8 @@ table {
   padding: 10px;
 }
 
-div .top-bar-left {
-  margin-bottom: 10px;
+.top-bar {
+  text-align: center;
 }
 
 .standings {
@@ -85,4 +83,37 @@ div .top-bar-left {
 form {
   width: 200px;
   padding-left: 20px;
+}
+
+.side {
+  padding-left: 10px;
+}
+
+a .side {
+  padding-left: 10px;
+}
+
+#container {
+  width:100%;
+}
+#left {
+  float: left;
+  width:500px;
+}
+
+#right {
+  float: right;
+}
+
+#center {
+  margin: auto;
+  width:500px;
+}
+
+.row form {
+  width: auto;
+}
+
+.center {
+  text-align: center;
 }

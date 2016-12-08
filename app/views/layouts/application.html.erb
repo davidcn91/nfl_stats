@@ -12,22 +12,6 @@
   </head>
 
   <body>
-    <nav>
-      <% if user_signed_in? %>
-        <li>
-          <span>
-            <%= current_user.first_name %> <%= current_user.last_name %>
-          </span>
-        </li>
-        <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <li><%= link_to image_tag("#{current_user.team.abbreviation}.jpg", size: "70x50"), team_path(current_user.team.id) %></li>
-      <% else %>
-        <li><%= link_to 'Sign In', new_user_session_path %></li>
-        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-      <% end %>
-    </nav>
-
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
@@ -35,36 +19,56 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
 
-    <div class="top-bar">
-      <div class="top-bar-left">
-        <%= link_to 'Home', teams_path, class: "header" %>
-        <%= link_to 'Stats', stats_path(side: "offense"), class: "header" %>
-        <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
-        <% if user_signed_in? %>
-          <%= link_to 'Add Game', new_game_path, class: "header" %>
-          <% if current_user.admin? %>
-            <%= link_to 'Users', users_path, class: "header" %>
+    <div class="row">
+      <div class="small-2 large-2 columns">
+        <div class="top-bar-center">
+          <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
+            <%= f.label :games_by_season, "Games by Season" %>
+            <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
+            <%= f.submit "Go", id: "games_button", type: "submit" %>
           <% end %>
-        <% end %>
 
-        <% if @seasons.nil? || (@seasons.length > 1) %>
-          <% @season_selected = "2001-2016" %>
-        <% else %>
-          <% @season_selected = @seasons[0] %>
-        <% end %>
+          <%= form_for :teams, url: team_path("teams_dropdown"), method: :get, class: "header" do |f| %>
+            <%= f.label :teams, "Teams" %>
+            <%= f.select :name, @team_collection, selected: @team_name %>
+            <%= f.submit "Go", id: "teams_button" %>
+          <% end %>
+        </div>
       </div>
 
-      <div class="top-bar-center">
-        <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
-          <%= f.label :games_by_season, "Games by Season" %>
-          <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
-          <%= f.submit "Go", id: "games_button", type: "submit" %>
-        <% end %>
+      <div class="small-2 large-8 columns">
+        <div class="top-bar">
+          <%= link_to 'Home', teams_path, class: "header" %>
+          <%= link_to 'Stats', stats_path(side: "offense"), class: "header" %>
+          <%= link_to 'Standings', teams_path(standings: "2001-2016"), class: "header" %>
+          <% if user_signed_in? %>
+            <%= link_to 'Add Game', new_game_path, class: "header" %>
+            <% if current_user.admin? %>
+              <%= link_to 'Users', users_path, class: "header" %>
+            <% end %>
+          <% end %>
 
-        <%= form_for :teams, url: team_path("teams_dropdown"), method: :get, class: "header" do |f| %>
-          <%= f.label :teams, "Teams" %>
-          <%= f.select :name, @team_collection, selected: @team_name %>
-          <%= f.submit "Go", id: "teams_button" %>
+          <% if @seasons.nil? || (@seasons.length > 1) %>
+            <% @season_selected = "2001-2016" %>
+          <% else %>
+            <% @season_selected = @seasons[0] %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="small-2 large-2 columns">
+        <% if user_signed_in? %>
+          <li>
+            <span>
+              <%= current_user.first_name %> <%= current_user.last_name %>
+            </span>
+          </li>
+          <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to image_tag("#{current_user.team.abbreviation}.jpg", size: "70x50"), team_path(current_user.team.id) %></li>
+        <% else %>
+          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
         <% end %>
       </div>
     </div>
