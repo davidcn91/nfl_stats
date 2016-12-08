@@ -7,13 +7,18 @@ body {
   background-color: #CCFF99;
 }
 
+.layout {
+  padding-bottom: 10px;
+  border-bottom-style: ridge;
+  border-width: 5px;
+}
+
 .top-bar {
   background-color: white;
 }
 
 #title {
-  position: absolute;
-  right: 20px;
+  margin-top: 50px;
 }
 
 li {
@@ -31,7 +36,7 @@ li {
 }
 
 table {
-  font-size: 13.5px;
+  font-size: 12px;
 }
 
 .header {
@@ -43,18 +48,16 @@ table {
   text-align: center;
 }
 
-.standings {
-  display: inline;
-  padding: 20px;
-}
-
-
 .name {
   text-align: left;
 }
 
 .standings td {
   padding: 5px;
+}
+
+.center.standings {
+  padding-top: 30px;
 }
 
 #stats {
@@ -94,6 +97,7 @@ a .side {
 #container {
   width:100%;
 }
+
 #left {
   float: left;
   width:500px;
@@ -136,6 +140,7 @@ a .side {
 .space {
   padding-right: 100px;
   padding-left: 100px;
+
 }
 
 .submit input {
@@ -143,4 +148,9 @@ a .side {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+}
+
+#team {
+
+  text-align: center;
 }
