@@ -41,7 +41,6 @@ feature 'user sees stats', %Q{
     expect(page).to have_content("Fum")
     expect(page).to have_content("TO/G")
     expect(page).to have_content("8.0")
-    expect(page).to have_content("7.0")
     expect(page).to have_content("10.0")
     expect(page).to_not have_content("9.0")
   end
@@ -58,8 +57,7 @@ feature 'user sees stats', %Q{
     expect(page).to have_content("Pen Yards")
     expect(page).to have_content("Fum")
     expect(page).to have_content("TO/G")
-    expect(page).to have_content("9.0")
-    expect(page).to have_content("7.0")
+    expect(page).to have_content("5.0")
     expect(page).to have_content("10.0")
   end
 
@@ -77,12 +75,10 @@ feature 'user sees stats', %Q{
     select "2015", from: "season_stats_season"
     click_button "Submit"
     expect(page).to have_content("8.0")
-    expect(page).to have_content("7.0")
     expect(page).to have_content("10.0")
     select "2011", from: "season_stats_season"
     click_button "Submit"
     expect(page).to_not have_content("8.0")
-    expect(page).to_not have_content("7.0")
     expect(page).to_not have_content("10.0")
     click_link("View Defensive Stats")
     expect(page).to have_content("2011")

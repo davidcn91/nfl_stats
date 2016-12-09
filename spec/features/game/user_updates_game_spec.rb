@@ -23,7 +23,11 @@ feature 'user updates game', %Q{
   scenario 'signed in user is the creator of the game and provides valid information' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}")
+    expect(page).to have_content(@game.away_team.name)
+    expect(page).to have_content(@game.away_score)
+    expect(page).to have_content(@game.home_team.name)
+    expect(page).to have_content(@game.home_score)
 
     click_link "Edit Game"
     select 2010, from: 'Season'
@@ -31,33 +35,45 @@ feature 'user updates game', %Q{
     select @team_3.name, from: 'game_away_team_id'
     select @team_1.name, from: 'game_home_team_id'
     fill_in 'Away Score', with: '27'
-    fill_in 'Home Score', with: '14'
+    fill_in 'Home Score', with: '19'
     fill_in 'Spread', with: '4'
     click_button 'Submit Game'
 
     expect(page).to have_content("Game updated successfully!")
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week 4: #{@team_3.name} 27 at #{@team_1.name} 14")
+    expect(page).to have_content("Week 4")
+    expect(page).to have_content(@game.away_team.name)
+    expect(page).to have_content("27")
+    expect(page).to have_content(@game.home_team.name)
+    expect(page).to have_content("19")
   end
 
   scenario 'signed in user is an admin' do
     sign_in(@user_2)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
-
+    expect(page).to have_content("Week #{@game.week}")
+    expect(page).to have_content(@game.away_team.name)
+    expect(page).to have_content(@game.away_score)
+    expect(page).to have_content(@game.home_team.name)
+    expect(page).to have_content(@game.home_score)
+    
     click_link "Edit Game"
     select 2010, from: 'Season'
     select 4, from: 'Week'
     select @team_3.name, from: 'game_away_team_id'
     select @team_1.name, from: 'game_home_team_id'
     fill_in 'Away Score', with: '27'
-    fill_in 'Home Score', with: '14'
+    fill_in 'Home Score', with: '19'
     fill_in 'Spread', with: '4'
     click_button 'Submit Game'
 
     expect(page).to have_content("Game updated successfully!")
     click_link "#{@team_3.location} #{@team_3.name}"
-    expect(page).to have_content("Week 4: #{@team_3.name} 27 at #{@team_1.name} 14")
+    expect(page).to have_content("Week 4")
+    expect(page).to have_content(@game.away_team.name)
+    expect(page).to have_content("27")
+    expect(page).to have_content(@game.home_team.name)
+    expect(page).to have_content("19")
   end
 
   scenario 'authenticated user supplies invalid information' do
@@ -76,7 +92,7 @@ feature 'user updates game', %Q{
     select @team_1.name, from: 'game_away_team_id'
     select @team_1.name, from: 'game_home_team_id'
     fill_in 'Away Score', with: '27'
-    fill_in 'Home Score', with: '14'
+    fill_in 'Home Score', with: '19'
     check 'Overtime'
     fill_in 'Spread', with: '4'
     click_button 'Submit Game'
@@ -109,7 +125,11 @@ feature 'user updates game', %Q{
   scenario 'signed in user is not creator of the team' do
     sign_in(@user_3)
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}")
+    expect(page).to have_content(@game.away_team.name)
+    expect(page).to have_content(@game.away_score)
+    expect(page).to have_content(@game.home_team.name)
+    expect(page).to have_content(@game.home_score)
     expect(page).to_not have_link("Edit Game")
     expect{visit edit_game_path(@game.id)}.to raise_error(ActionController::RoutingError)
   end
@@ -117,7 +137,11 @@ feature 'user updates game', %Q{
   scenario 'user is not signed in' do
     visit root_path
     click_link "#{@team_1.location} #{@team_1.name}"
-    expect(page).to have_content("Week #{@game.week}: #{@game.away_team.name} #{@game.away_score} at #{@game.home_team.name} #{@game.home_score}")
+    expect(page).to have_content("Week #{@game.week}")
+    expect(page).to have_content(@game.away_team.name)
+    expect(page).to have_content(@game.away_score)
+    expect(page).to have_content(@game.home_team.name)
+    expect(page).to have_content(@game.home_score)
     expect(page).to_not have_button("Edit Game")
     expect{visit edit_game_path(@game.id)}.to raise_error(ActionController::RoutingError)
   end

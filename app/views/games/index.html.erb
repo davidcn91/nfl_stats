@@ -1,51 +1,62 @@
-<h1>
-  <% if @seasons.length == 1 %>
-    <%= @seasons[0] %>
-  <% else %>
-    2001-2016
-  <% end %>
-</h1>
+<div id="games">
+  <h1>
+    <% if @seasons.length == 1 %>
+      <%= @seasons[0] %>
+    <% else %>
+      2001-2016
+    <% end %>
+  </h1>
 
-<ul>
-  <% @seasons.each do |season| %>
-    <li>
-      <% if @seasons.length > 1 %>
-        <strong><%= season %></strong>
-      <% end %>
-      <ul>
-        <% (1..17).to_a.each do |week| %>
-          <li><%= "Week #{week}" %>
-            <ul>
-              <% @games.each do |game| %>
-                <% if (game.week) == week && (game.season == season) %>
-                  <li>
-                    <%= link_to "#{game.away_team.abbreviation}", team_path(game.away_team.id) %>
-                    <%= "#{game.away_score} at " %>
-                    <%= link_to "#{game.home_team.abbreviation}", team_path(game.home_team.id) %>
-                    <%= "#{game.home_score}" %>
-                    <% if game.spread >= 0 %>
-                      <%= "(+#{game.spread})" %>
-                    <% else %>
-                      <%= "(#{game.spread})" %>
-                    <% end %>
-                    <% if game.overtime %>
-                      <span> (OT)</span>
-                    <% end %>
-                    <%= link_to "Game Details", game_path(game.id) %>
-                    <% if user_signed_in? && ((current_user.id == game.user_id) || current_user.role == "admin") %>
-                      <% if game.stat.nil? %>
-                        <br /><%= link_to "Add Stats", new_game_stat_path(game.id) %>
-                      <% end %>
-                      <br /><%= link_to "Edit Game", edit_game_path(game.id) %>
-                      <%= button_to "Delete Game", game, method: :delete %>
-                    <% end %>
-                  </li>
-                <% end %>
-              <% end %>
-            </ul>
-          </li>
+  <ul>
+    <% @seasons.each do |season| %>
+      <li>
+        <% if @seasons.length > 1 %>
+          <strong><%= season %></strong>
         <% end %>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+        <ul>
+          <% (1..17).to_a.each do |week| %>
+            <li><%= "Week #{week}" %>
+              <table>
+                <% @games.each do |game| %>
+                  <% if (game.week) == week && (game.season == season) %>
+                    <tr class="row">
+                      <td class="small-1 large-1 columns"><%= link_to game.away_team.abbreviation, team_path(game.away_team.id) %></td>
+                      <td class="small-1 large-1 columns"><%= game.away_score %></td>
+                      <td class="small-1 large-1 columns">at</td>
+                      <td class="small-1 large-1 columns"><%= link_to game.home_team.abbreviation, team_path(game.home_team.id) %></td>
+                      <td class="small-1 large-1 columns"><%= game.home_score %></td>
+                      <td class="small-1 large-1 columns">
+                        <% if game.spread >= 0 %>
+                          <%= "(+#{game.spread})" %>
+                        <% else %>
+                          <%= "(#{game.spread})" %>
+                        <% end %>
+                      </td>
+                      <td class="small-1 large-1 columns">
+                        <% if game.overtime %>
+                          <span> (OT)</span>
+                        <% end %>
+                      </td>
+                      <td class="small-1 large-1 columns wide"><%= link_to "Game Details", game_path(game.id) %></td>
+                      <% if user_signed_in? && ((current_user.id == game.user_id) || current_user.role == "admin") %>
+                        <td class="small-1 large-1 columns"><%= link_to "Edit Game", edit_game_path(game.id) %></td>
+                        <td class="small-1 large-1 columns"><%= button_to "Delete Game", game, method: :delete %></td>
+                        <td class="small-1 large-1 columns">
+                          <% if game.stat.nil? %>
+                            <%= link_to "Add Stats", new_game_stat_path(game.id) %>
+                          <% end %>
+                        </td>
+                      <% else %>
+                        <td class="small-1 large-1 columns"></td><td class="small-1 large-1 columns"></td><td class="small-1 large-1 columns"></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </table>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>
