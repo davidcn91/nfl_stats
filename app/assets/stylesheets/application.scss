@@ -4,21 +4,28 @@
 body {
   padding-bottom: 50px;
   margin-bottom: 50px;
-  background-color: #CCFF99;
+  background-color: #EAC67A;
 }
 
 .layout {
   padding-bottom: 10px;
   border-bottom-style: ridge;
   border-width: 5px;
+  background-color: #984B43;
 }
 
 .top-bar {
-  background-color: white;
+  background-color: #233237;
 }
 
 #title {
   margin-top: 50px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#title a {
+  color: white;
 }
 
 li {
@@ -73,7 +80,7 @@ table {
   text-align: center;
 }
 
-#stats .favorite, #stats .team {
+#stats a.favorite, #stats a.team {
   text-align: left;
 }
 
@@ -165,4 +172,33 @@ a .side {
 #games {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+a {
+  color: black;
+}
+
+.top-bar a {
+  color: white;
+}
+
+#stats {
+  table-layout: fixed;
+}
+
+#stats tr.table_row {
+  line-height: 0px;
+}
+
+#stats th.a {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+#stats td {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
