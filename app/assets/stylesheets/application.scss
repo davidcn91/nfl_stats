@@ -18,6 +18,10 @@ body {
   background-color: #233237;
 }
 
+.layout form label {
+  color: white
+}
+
 #title {
   margin-top: 50px;
   font-weight: bold;
@@ -56,6 +60,10 @@ table {
 }
 
 .name {
+  text-align: left;
+}
+
+.standings th {
   text-align: left;
 }
 
