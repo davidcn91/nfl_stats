@@ -11,11 +11,12 @@
     <% @seasons.each do |season| %>
       <li>
         <% if @seasons.length > 1 %>
-          <strong><%= season %></strong>
+          <h3 class="season_header"><%= season %></h3>
         <% end %>
-        <ul>
+        <ul class="season_games">
           <% (1..17).to_a.each do |week| %>
-            <li><%= "Week #{week}" %>
+            <li>
+              <div class="week"><%= "Week #{week}" %></div>
               <table>
                 <% @games.each do |game| %>
                   <% if (game.week) == week && (game.season == season) %>
