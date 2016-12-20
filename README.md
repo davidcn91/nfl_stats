@@ -1,26 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # Nfl Stats
-Your app description, here.
+
+This app is an interactive database for NFL statistics.  It allows the user to
+add and edit NFL game data as well as detailed game statistics.  The app
+includes a standings page and a statistics page that displays data from various
+NFL seasons and can be sorted.  There is also a page for each individual team
+that shows all games added for the given team, from which the user can view
+more detailed game statistics by clicking on any specific game.
