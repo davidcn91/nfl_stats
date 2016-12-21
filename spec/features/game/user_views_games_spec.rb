@@ -23,33 +23,6 @@ feature 'user sees games', %Q{
     @stat = FactoryGirl.create(:stat, game_id: @game_1.id)
   end
 
-  scenario 'user views games from all seasons' do
-    sign_in(@user_1)
-    select "2001-2016", from: "games_by_season_season"
-    click_button 'games_button'
-    expect(page).to have_content("#{@game_1.away_team.abbreviation} #{@game_1.away_score} at #{@game_1.home_team.abbreviation} #{@game_1.home_score}")
-    expect(page).to have_content("#{@game_2.away_team.abbreviation} #{@game_2.away_score} at #{@game_2.home_team.abbreviation} #{@game_2.home_score}")
-    expect(page).to have_link("Game Details")
-  end
-
-  scenario 'user views games from specific season' do
-    visit root_path
-    select @game_1.season, from: "games_by_season_season"
-    click_button 'games_button'
-    expect(page).to have_content("#{@game_1.away_team.abbreviation} #{@game_1.away_score} at #{@game_1.home_team.abbreviation} #{@game_1.home_score}")
-    expect(page).to_not have_content("#{@game_2.away_team.abbreviation} #{@game_2.away_score} at #{@game_2.home_team.abbreviation} #{@game_2.home_score}")
-
-    select @game_2.season, from: "games_by_season_season"
-    click_button 'games_button'
-    expect(page).to have_content("#{@game_2.away_team.abbreviation} #{@game_2.away_score} at #{@game_2.home_team.abbreviation} #{@game_2.home_score}")
-    expect(page).to_not have_content("#{@game_1.away_team.abbreviation} #{@game_1.away_score} at #{@game_1.home_team.abbreviation} #{@game_1.home_score}")
-
-    select "2005", from: "games_by_season_season"
-    click_button 'games_button'
-    expect(page).to_not have_content("#{@game_1.away_team.abbreviation} #{@game_1.away_score} at #{@game_1.home_team.abbreviation} #{@game_1.home_score}")
-    expect(page).to_not have_content("#{@game_2.away_team.abbreviation} #{@game_2.away_score} at #{@game_2.home_team.abbreviation} #{@game_2.home_score}")
-  end
-
   scenario 'user clicks season link' do
     sign_in(@user_1)
     click_link "#{@team_1.location} #{@team_1.name}"

@@ -23,21 +23,4 @@ feature 'user views team page', %Q{
     expect(page).to have_content("Games")
   end
 
-  scenario "user selects team from dropdown" do
-    visit root_path
-    select @team_1.name, from: "teams_name"
-    click_button "teams_button"
-
-    expect(page).to have_content(@team_1.location)
-    expect(page).to have_content(@team_1.name)
-    expect(page).to have_content("Games")
-
-    select @team_2.name, from: "teams_name"
-    click_button "teams_button"
-
-    expect(page).to have_content(@team_2.location)
-    expect(page).to have_content(@team_2.name)
-    expect(page).to have_content("Games")
-  end
-
 end

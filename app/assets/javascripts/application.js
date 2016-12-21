@@ -13,3 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+  $(".profile").hide();
+  $(".user_name").mouseenter(function() {
+    $(".profile").show();
+  });
+  $(".profile_info").mouseleave(function() {
+    $('.profile').hide();
+  });
+
+  $("#games_by_season_season").change(function() {
+     $(this).parent().submit();
+  });
+
+  $("#teams_name").change(function() {
+     $(this).parent().submit();
+  });
+});
