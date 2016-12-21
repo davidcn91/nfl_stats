@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
       else
         @season = params[:standings]
       end
+      @format = params[:format]
       render 'standings'
     end
   end

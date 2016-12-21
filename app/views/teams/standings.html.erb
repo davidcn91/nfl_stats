@@ -1,5 +1,20 @@
 <div class="row standings">
-  <div class="small-2 large-2 columns left standings"><p></p></div>
+  <div class="small-2 large-2 columns left standings">
+      <% if (!@format || @format == "Straight Up") %>
+        <% current = "Straight Up" %>
+        <% alt = "Vs Spread" %>
+      <% else %>
+        <% current = "Vs Spread" %>
+        <% alt = "Straight Up" %>
+        <% spread = true %>
+      <% end %>
+    <strong>
+      <%= current %>
+    </strong>
+    <br/>
+
+    <%= link_to alt, teams_path(standings: @season, format: alt) %>
+  </div>
   <div class="small-4 large-8 columns center standings">
     <h2>Standings</h2>
   </div>
@@ -12,12 +27,11 @@
   </div>
 </div>
 
-
 <h3 align="center"><%= @season %></h3>
 
 <div class="row">
   <% ["NFC","AFC"].each do |conference| %>
-    <div class="small-6 large-6 columns standings">
+    <div class="small-6 large-6 columns standings_table">
       <table class="standings">
         <% Team::DIVISIONS.each do |division| %>
           <% if division.include?(conference) %>
@@ -33,22 +47,22 @@
               <th>PA</th>
               <th>Diff</td>
             </tr>
-            <% division_teams = @teams.where(division: division).sort_by {|t| t.win_percentage(@season)}.reverse %>
+            <% division_teams = @teams.where(division: division).sort_by {|t| t.win_percentage(@season, spread)}.reverse %>
             <% division_teams.each do |team| %>
               <tr class=<%= team_class(team) %>>
                 <td class="name"><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></td>
-                <td><%= team.record(@season)[0] %></td>
-                <td><%= team.record(@season)[1] %></td>
-                <td><%= team.record(@season)[2] %></td>
+                <td><%= team.record(@season, spread)[0] %></td>
+                <td><%= team.record(@season, spread)[1] %></td>
+                <td><%= team.record(@season, spread)[2] %></td>
                 <td>
-                  <% win_pct = ('%.3f' % team.win_percentage(@season)).to_s %>
+                  <% win_pct = ('%.3f' % team.win_percentage(@season, spread)).to_s %>
                   <% if win_pct[0] == "0" %>
                     <% win_pct[0] = " " %>
                   <% end %>
                   <%= win_pct %>
                 </td>
-                <td><%= "#{team.record(@season,true)[0]}-#{team.record(@season,true)[1]}-#{team.record(@season,true)[2]}" %></td>
-                <td><%= "#{team.record(@season,false,true)[0]}-#{team.record(@season,false,true)[1]}-#{team.record(@season,false,true)[2]}" %></td>
+                <td><%= "#{team.record(@season,spread,true)[0]}-#{team.record(@season,true)[1]}-#{team.record(@season,true)[2]}" %></td>
+                <td><%= "#{team.record(@season,spread,false,true)[0]}-#{team.record(@season,false,true)[1]}-#{team.record(@season,false,true)[2]}" %></td>
                 <td><%= team.standings_points(@season, "offense") %></td>
                 <td><%= team.standings_points(@season, "defense") %></td>
                 <td><%= team.standings_points(@season, "offense") - team.standings_points(@season, "defense") %></td>

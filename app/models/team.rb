@@ -280,7 +280,7 @@ class Team < ActiveRecord::Base
     total
   end
 
-  def record(season = "2001-2016", div = nil, conf = nil)
+  def record(season = "2001-2016", spread=nil, div = nil, conf = nil)
     record = [0,0,0]
     if season == "2001-2016"
       team_away_games = away_games
@@ -297,20 +297,26 @@ class Team < ActiveRecord::Base
       team_home_games = conference_home_games(team_home_games)
     end
     team_away_games.each do |game|
-      if game.away_score > game.home_score
+      away_points = game.away_score
+      home_points = game.home_score
+      home_points += game.spread if spread
+      if away_points > home_points
         record[0] += 1
-      elsif game.home_score > game.away_score
+      elsif home_points > away_points
         record[1] += 1
-      elsif game.home_score == game.away_score
+      elsif home_points == away_points
         record[2] += 1
       end
     end
     team_home_games.each do |game|
-      if game.home_score > game.away_score
+      away_points = game.away_score
+      home_points = game.home_score
+      home_points += game.spread if spread
+      if home_points > away_points
         record[0] += 1
-      elsif game.away_score > game.home_score
+      elsif away_points > home_points
         record[1] += 1
-      elsif game.home_score == game.away_score
+      elsif home_points == away_points
         record[2] += 1
       end
     end
@@ -357,11 +363,11 @@ class Team < ActiveRecord::Base
     conf_home_games
   end
 
-  def win_percentage(season)
-    if record(season) == [0,0,0]
+  def win_percentage(season, spread=nil)
+    if record(season, spread) == [0,0,0]
       0
     else
-      (record(season)[0] + (record(season)[2].to_f/2))/(record(season)[0] + record(season)[1] + record(season)[2])
+      (record(season, spread)[0] + (record(season, spread)[2].to_f/2))/(record(season, spread)[0] + record(season, spread)[1] + record(season, spread)[2])
     end
   end
 

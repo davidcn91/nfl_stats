@@ -51,6 +51,10 @@ li {
   text-align: center;
 }
 
+.conference h3 {
+  background-color: #E6E6E6;
+}
+
 .sidebar {
   background-color: #233237;
   height: 650px;
@@ -58,7 +62,7 @@ li {
 }
 
 .favorite {
-  background-color: yellow;
+  font-weight: bold;
 }
 
 table {
