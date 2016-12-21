@@ -24,10 +24,14 @@ $(document).ready(function(){
   });
 
   $("#games_by_season_season").change(function() {
-     $(this).parent().submit();
+    if ($("#games_by_season_season").val() != "") {
+      $(this).parent().submit();
+    };
   });
 
   $("#teams_name").change(function() {
-     $(this).parent().submit();
+    if ($("#teams_name").val() != "") {
+      $(this).parent().submit();
+    };
   });
 });

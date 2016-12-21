@@ -20,13 +20,13 @@
           <li>
             <%= form_for :games_by_season, url: games_path, method: :get, id: "games_by_season", class: "header" do |f| %>
               <%= f.label :games_by_season, "Games by Season" %>
-              <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected %>
+              <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season_selected, include_blank: true %>
             <% end %>
           </li>
           <li>
             <%= form_for :teams, url: team_path("teams_dropdown"), method: :get, class: "header" do |f| %>
               <%= f.label :teams, "Teams" %>
-              <%= f.select :name, @team_collection, selected: @team_name %>
+              <%= f.select :name, @team_collection, selected: @team_name, include_blank: true %>
             <% end %>
           </li>
           <li>

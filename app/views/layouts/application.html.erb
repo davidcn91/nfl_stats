@@ -19,10 +19,12 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
 
-    <% if @seasons.nil? || (@seasons.length > 1) %>
-      <% @season_selected = "2001-2016" %>
-    <% else %>
-      <% @season_selected = @seasons[0] %>
+    <% if !@seasons.nil? %>
+      <% if (@seasons.length > 1) %>
+        <% @season_selected = "2001-2016" %>
+      <% else %>
+        <% @season_selected = @seasons[0] %>
+      <% end %>
     <% end %>
 
     <%= render 'layouts/top_bar' %>
