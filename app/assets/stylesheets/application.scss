@@ -48,6 +48,13 @@ li {
   display: table-cell;
   padding-left: 100px;
   padding-right: 100px;
+  text-align: center;
+}
+
+.sidebar {
+  background-color: #233237;
+  height: 650px;
+  margin-top: -20px;
 }
 
 .favorite {
@@ -188,6 +195,10 @@ a .side {
 #games {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.row i {
+  font-size: 10px;
 }
 
 a {

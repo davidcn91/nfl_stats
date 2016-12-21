@@ -1,8 +1,9 @@
 <h2 align="center">Teams</h2>
 
-<div align="center">
+<div class="row">
+  <div class="small-1 large-2 columns sidebar"></div>
   <% ["NFC","AFC"].each do |conference| %>
-    <div class="conference">
+    <div class="conference small-2 large-4 columns">
       <% Team::DIVISIONS.each do |division| %>
         <% if division.include?(conference) %>
           <h3 align="center"><%= division %></h3>
@@ -17,4 +18,5 @@
       <% end %>
     </div>
   <% end %>
+  <div class="small-1 large-2 columns sidebar"><p></p></div>
 </div>
