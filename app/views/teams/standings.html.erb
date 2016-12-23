@@ -47,7 +47,7 @@
               <th>PA</th>
               <th>Diff</td>
             </tr>
-            <% division_teams = @teams.where(division: division).sort_by {|t| t.win_percentage(@season, spread)}.reverse %>
+            <% division_teams = @teams.where(division: division).sort_by {|t| [t.win_percentage(@season, spread),t.record(@season, spread)[0],(t.record(@season, spread)[1]*-1)]}.reverse %>
             <% division_teams.each do |team| %>
               <tr class=<%= team_class(team) %>>
                 <td class="name"><%= link_to "#{team.location} #{team.name}", team_path(team.id) %></td>
