@@ -4,14 +4,22 @@
 body {
   padding-bottom: 50px;
   margin-bottom: 50px;
-  background-color: #EAC67A;
+  background-color: black;
 }
 
 .layout {
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   border-bottom-style: ridge;
   border-width: 5px;
-  background-color: #984B43;
+  background-color: #66d9ff;
+}
+
+.text {
+  color: white;
+}
+
+.text a {
+  color: white;
 }
 
 .top-bar {
@@ -53,6 +61,7 @@ li {
 
 .conference h3 {
   background-color: #E6E6E6;
+  color: black;
 }
 
 .sidebar {
@@ -232,4 +241,8 @@ a {
   padding-right: 0px;
   margin-left: 0px;
   margin-right: 0px;
+}
+
+.btn {
+  color: black;
 }

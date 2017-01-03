@@ -1,15 +1,15 @@
-<div id="team">
+<div id="team" class="text">
   <h1><%= "#{@team.location} #{@team.name} " %><%= image_tag "#{@team.abbreviation}.jpg", size: "50x35" %></h1>
 </div>
 
 <div id="games">
-  <h3>Games</h3>
+  <h3 class="text">Games</h3>
 
   <ul>
     <% (2001..2016).to_a.reverse.each do |season| %>
       <% if @games.pluck(:season).include?(season) %>
         <li>
-          <h4><%= link_to season, games_path(season: season) %></h4>
+          <h4 class="text"><%= link_to season, games_path(season: season) %></h4>
           <table>
             <% @games.reverse.each do |game| %>
               <% if game.season == season %>

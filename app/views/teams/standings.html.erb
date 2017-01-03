@@ -1,33 +1,34 @@
-<div class="row standings">
-  <div class="small-2 large-2 columns left standings">
-      <% if (!@format || @format == "Straight Up") %>
-        <% current = "Straight Up" %>
-        <% alt = "Vs Spread" %>
-      <% else %>
-        <% current = "Vs Spread" %>
-        <% alt = "Straight Up" %>
-        <% spread = true %>
+<div class="text">
+  <div class="row standings">
+    <div class="small-2 large-2 columns left standings">
+        <% if (!@format || @format == "Straight Up") %>
+          <% current = "Straight Up" %>
+          <% alt = "Vs Spread" %>
+        <% else %>
+          <% current = "Vs Spread" %>
+          <% alt = "Straight Up" %>
+          <% spread = true %>
+        <% end %>
+      <strong>
+        <%= current %>
+      </strong>
+      <br/>
+
+      <%= link_to alt, teams_path(standings: @season, format: alt) %>
+    </div>
+    <div class="small-4 large-8 columns center standings">
+      <h2>Standings</h2>
+    </div>
+    <div class="small-2 large-2 columns right standings">
+      <%= form_for :standings_by_season, url: teams_path, method: :get, id: "standings_by_season" do |f| %>
+        <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season %>
+        <%= f.submit "Go", id: "standings_button", class: "btn" %>
       <% end %>
-    <strong>
-      <%= current %>
-    </strong>
-    <br/>
+    </div>
+  </div>
 
-    <%= link_to alt, teams_path(standings: @season, format: alt) %>
-  </div>
-  <div class="small-4 large-8 columns center standings">
-    <h2>Standings</h2>
-  </div>
-  <div class="small-2 large-2 columns right standings">
-    <%= form_for :standings_by_season, url: teams_path, method: :get, id: "standings_by_season" do |f| %>
-      <%= f.label :standings_by_season, "Standings by Season" %>
-      <%= f.select :season, (["2001-2016"] + @season_collection), selected: @season %>
-      <%= f.submit "Go", id: "standings_button" %>
-    <% end %>
-  </div>
+  <h3 align="center"><%= @season %></h3>
 </div>
-
-<h3 align="center"><%= @season %></h3>
 
 <div class="row">
   <% ["NFC","AFC"].each do |conference| %>

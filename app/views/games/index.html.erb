@@ -1,5 +1,5 @@
 <div id="games">
-  <h1>
+  <h1 class="text">
     <% if @seasons.length == 1 %>
       <%= @seasons[0] %>
     <% else %>
@@ -11,12 +11,12 @@
     <% @seasons.each do |season| %>
       <li>
         <% if @seasons.length > 1 %>
-          <h3 class="season_header"><%= season %></h3>
+          <h3 class="season_header text"><%= season %></h3>
         <% end %>
         <ul class="season_games">
           <% (1..17).to_a.each do |week| %>
             <li>
-              <div class="week"><%= "Week #{week}" %></div>
+              <div class="week text"><%= "Week #{week}" %></div>
               <table>
                 <% @games.each do |game| %>
                   <% if (game.week) == week && (game.season == season) %>
