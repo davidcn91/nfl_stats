@@ -1,36 +1,38 @@
-<h2>
-  <%= link_to @game.season, games_path(season: @game.season) %>
-  <%= "Week #{@game.week}: "%>
-  <%= link_to ("#{@game.away_team.location} #{@game.away_team.name}"), team_path(@game.away_team.id) %>
-  <%= " #{@game.away_score} at "%>
-  <%= link_to ("#{@game.home_team.location} #{@game.home_team.name}"), team_path(@game.home_team_id) %>
-  <%= " #{@game.home_score}" %>
-</h2>
-<% if user_signed_in? && ((current_user.id == @game.user_id) || current_user.role == "admin") %>
-  <br /><%= link_to "Edit Game", edit_game_path(@game.id) %>
-  <%= button_to "Delete Game", @game, method: :delete %>
-<% end %>
+<div class="text">
+  <h2>
+    <%= link_to @game.season, games_path(season: @game.season) %>
+    <%= "Week #{@game.week}: "%>
+    <%= link_to ("#{@game.away_team.location} #{@game.away_team.name}"), team_path(@game.away_team.id) %>
+    <%= " #{@game.away_score} at "%>
+    <%= link_to ("#{@game.home_team.location} #{@game.home_team.name}"), team_path(@game.home_team_id) %>
+    <%= " #{@game.home_score}" %>
+  </h2>
+  <% if user_signed_in? && ((current_user.id == @game.user_id) || current_user.role == "admin") %>
+    <br /><%= link_to "Edit Game", edit_game_path(@game.id) %>
+    <%= button_to "Delete Game", @game, method: :delete, class: "btn" %>
+  <% end %>
 
-<p>
-  <span>Betting Line: </span>
-  <% if @game.spread < 0 %>
-    <%= "#{@game.home_team.abbreviation} #{@game.spread}" %>
-  <% elsif @game.spread > 0 %>
-    <%= "#{@game.away_team.abbreviation} -#{@game.spread}" %>
-  <% else %>
-    <span>PICK</span>
-  <% end %>
-</p>
-<p>
-  <span>Winner (against the spread): </span>
-  <% if (@game.away_score - @game.home_score) > @game.spread %>
-    <%= @game.away_team.abbreviation %>
-  <% elsif (@game.away_score - @game.home_score) < @game.spread %>
-    <%= @game.home_team.abbreviation %>
-  <% else %>
-    <span>PUSH</span>
-  <% end %>
-</p>
+  <p>
+    <span>Betting Line: </span>
+    <% if @game.spread < 0 %>
+      <%= "#{@game.home_team.abbreviation} #{@game.spread}" %>
+    <% elsif @game.spread > 0 %>
+      <%= "#{@game.away_team.abbreviation} -#{@game.spread}" %>
+    <% else %>
+      <span>PICK</span>
+    <% end %>
+  </p>
+  <p>
+    <span>Winner (against the spread): </span>
+    <% if (@game.away_score - @game.home_score) > @game.spread %>
+      <%= @game.away_team.abbreviation %>
+    <% elsif (@game.away_score - @game.home_score) < @game.spread %>
+      <%= @game.home_team.abbreviation %>
+    <% else %>
+      <span>PUSH</span>
+    <% end %>
+  </p>
+</div>
 
 <% if @game.stat.nil? %>
   <h3>
@@ -124,6 +126,6 @@
   </table>
 
   <% if user_signed_in? && ((current_user.id == @game.user_id) || current_user.admin?) %>
-    <%= link_to "Edit Stats", edit_game_stat_path(@game.id, @game.stat.id) %>
+    <%= link_to "Edit Stats", edit_game_stat_path(@game.id, @game.stat.id), class: "text" %>
   <% end %>
 <% end %>

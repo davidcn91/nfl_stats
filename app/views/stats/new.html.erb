@@ -1,23 +1,25 @@
-<div class="add_stats">
-  <h1>Add Stats</h1>
-  <h3>
-    <%= link_to @game.season, games_path(season: @game.season) %>
-    <%= "Week #{@game.week}: " %>
-    <%= link_to @game.away_team.name, team_path(@game.away_team.id) %>
-    <%= "#{@game.away_score} at " %>
-    <%= link_to @game.home_team.name, team_path(@game.home_team.id) %>
-    <%= @game.home_score %>
-    <% if @game.overtime? %>
-      <span> (OT)</span>
-    <% end %>
-    <% if user_signed_in? && (current_user.admin? || (current_user.id == @game.user_id)) %>
-      <%= link_to "Edit Game", edit_game_path(@game.id) %>
-    <% end %>
-  </h3>
+<div class="text">
+  <div class="add_stats">
+    <h1>Add Stats</h1>
+    <h3>
+      <%= link_to @game.season, games_path(season: @game.season) %>
+      <%= "Week #{@game.week}: " %>
+      <%= link_to @game.away_team.name, team_path(@game.away_team.id) %>
+      <%= "#{@game.away_score} at " %>
+      <%= link_to @game.home_team.name, team_path(@game.home_team.id) %>
+      <%= @game.home_score %>
+      <% if @game.overtime? %>
+        <span> (OT)</span>
+      <% end %>
+      <% if user_signed_in? && (current_user.admin? || (current_user.id == @game.user_id)) %>
+        <%= link_to "Edit Game", edit_game_path(@game.id) %>
+      <% end %>
+    </h3>
+  </div>
+
+  <% @stat.errors.full_messages.each do |error| %>
+    <%= error %><br />
+  <% end %>
+
+  <%= render 'form' %>
 </div>
-
-<% @stat.errors.full_messages.each do |error| %>
-  <%= error %><br />
-<% end %>
-
-<%= render 'form' %>

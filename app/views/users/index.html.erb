@@ -1,12 +1,14 @@
-<h1>Users</h1>
+<div class="text">
+  <h1>Users</h1>
 
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= "#{user.first_name} #{user.last_name}, #{user.email} " %>
-      <% if !user.admin? %>
-        <%= button_to 'Delete User', user, method: :delete %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @users.each do |user| %>
+      <li>
+        <%= "#{user.first_name} #{user.last_name}, #{user.email} " %>
+        <% if !user.admin? %>
+          <%= button_to 'Delete User', user, method: :delete, class: "btn" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
