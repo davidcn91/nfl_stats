@@ -23,8 +23,8 @@ class Game < ActiveRecord::Base
   end
 
   def away_team_cannot_have_multiple_games_in_same_week
-    if !away_team.nil?
-      if !id.nil?
+    if away_team
+      if id
         @game = (Game.where(id: id)[0])
       end
       if id.nil? || (@game.away_team.id != away_team.id) || (@game.season != season) || (@game.week != week)
@@ -38,8 +38,8 @@ class Game < ActiveRecord::Base
   end
 
   def home_team_cannot_have_multiple_games_in_same_week
-    if !home_team.nil?
-      if !id.nil?
+    if home_team
+      if id
         @game = (Game.where(id: id)[0])
       end
       if id.nil? || (@game.home_team.id != home_team.id) || (@game.season != season) || (@game.week != week)
