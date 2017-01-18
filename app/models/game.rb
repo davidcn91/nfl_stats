@@ -6,7 +6,6 @@ class Game < ActiveRecord::Base
   validate :teams_cannot_be_same, :away_team_cannot_have_multiple_games_in_same_week,
   :home_team_cannot_have_multiple_games_in_same_week, :overtime_game_margin
 
-
   belongs_to :away_team, class_name: 'Team', foreign_key: 'away_team_id'
   belongs_to :home_team, class_name: 'Team', foreign_key: 'home_team_id'
   belongs_to :user
